@@ -1,9 +1,11 @@
 # ADR-001: Monorepo Architecture with Turborepo
 
 ## Status
+
 Accepted
 
 ## Date
+
 2025-01-10
 
 ## Context
@@ -66,12 +68,12 @@ graph TD
     A --> C[packages/game-logic]
     A --> D[packages/api-client]
     A --> E[packages/types]
-    
+
     F[apps/mobile] --> B
     F --> C
     F --> D
     F --> E
-    
+
     B --> E
     C --> E
     D --> E

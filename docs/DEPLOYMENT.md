@@ -32,15 +32,18 @@ pnpm lint
 ### Build Artifacts
 
 **Web Application (`apps/web`):**
+
 - Output: `.next/` directory
 - Static files: `.next/static/`
 - Server files: `.next/server/`
 
 **Mobile Application (`apps/mobile`):**
+
 - Development: Expo development build
 - Production: Platform-specific binaries (IPA/APK)
 
 **Shared Packages:**
+
 - Output: `dist/` directories
 - TypeScript declarations: `*.d.ts` files
 - Source maps: `*.map` files
@@ -63,6 +66,7 @@ pnpm size-limit
 ### Vercel Deployment (Recommended)
 
 **Setup:**
+
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -73,6 +77,7 @@ vercel link
 ```
 
 **Configuration (`vercel.json`):**
+
 ```json
 {
   "buildCommand": "cd ../.. && pnpm build --filter=web",
@@ -88,6 +93,7 @@ vercel link
 ```
 
 **Deploy:**
+
 ```bash
 # Deploy to preview
 vercel
@@ -99,6 +105,7 @@ vercel --prod
 ### Docker Deployment
 
 **Dockerfile (`apps/web/Dockerfile`):**
+
 ```dockerfile
 FROM node:18-alpine AS base
 RUN corepack enable
@@ -128,6 +135,7 @@ CMD ["node", "apps/web/server.js"]
 ```
 
 **Build and run:**
+
 ```bash
 # Build Docker image
 docker build -t connect-star-web .
@@ -158,6 +166,7 @@ cd apps/web && pnpm build && pnpm export
 ### Expo Application Services (EAS)
 
 **Setup:**
+
 ```bash
 # Install EAS CLI
 npm install -g @expo/eas-cli
@@ -170,6 +179,7 @@ eas build:configure
 ```
 
 **EAS Configuration (`eas.json`):**
+
 ```json
 {
   "build": {
@@ -203,6 +213,7 @@ eas build:configure
 ### Building for Different Platforms
 
 **Development Build:**
+
 ```bash
 # iOS simulator
 eas build --platform ios --profile development
@@ -212,6 +223,7 @@ eas build --platform android --profile development
 ```
 
 **Production Build:**
+
 ```bash
 # iOS App Store
 eas build --platform ios --profile production
@@ -226,6 +238,7 @@ eas build --platform all --profile production
 ### App Store Submission
 
 **iOS (App Store Connect):**
+
 ```bash
 # Build and submit
 eas submit --platform ios --latest
@@ -236,6 +249,7 @@ eas build --platform ios --profile production
 ```
 
 **Android (Google Play Console):**
+
 ```bash
 # Build and submit
 eas submit --platform android --latest
@@ -250,6 +264,7 @@ eas build --platform android --profile production
 ### Environment Variables
 
 **Web Application (`.env.local`):**
+
 ```bash
 # API Configuration
 NEXT_PUBLIC_API_URL=https://api.connectstar.com
@@ -263,32 +278,36 @@ NEXT_PUBLIC_ENABLE_MULTIPLAYER=true
 ```
 
 **Mobile Application (`app.config.js`):**
+
 ```javascript
 export default {
   expo: {
     extra: {
       apiUrl: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3001',
       wsUrl: process.env.EXPO_PUBLIC_WS_URL || 'ws://localhost:3001',
-      enableMultiplayer: process.env.EXPO_PUBLIC_ENABLE_MULTIPLAYER === 'true'
-    }
-  }
-}
+      enableMultiplayer: process.env.EXPO_PUBLIC_ENABLE_MULTIPLAYER === 'true',
+    },
+  },
+};
 ```
 
 ### Environment-Specific Builds
 
 **Development:**
+
 ```bash
 NODE_ENV=development pnpm dev
 ```
 
 **Staging:**
+
 ```bash
 NODE_ENV=staging pnpm build
 EXPO_PUBLIC_API_URL=https://staging-api.connectstar.com eas build --profile preview
 ```
 
 **Production:**
+
 ```bash
 NODE_ENV=production pnpm build
 EXPO_PUBLIC_API_URL=https://api.connectstar.com eas build --profile production
@@ -299,6 +318,7 @@ EXPO_PUBLIC_API_URL=https://api.connectstar.com eas build --profile production
 ### GitHub Actions Workflow
 
 **`.github/workflows/deploy.yml`:**
+
 ```yaml
 name: Deploy
 
@@ -317,19 +337,19 @@ jobs:
         with:
           node-version: '18'
           cache: 'pnpm'
-      
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Run tests
         run: pnpm test:ci
-      
+
       - name: Type check
         run: pnpm type-check
-      
+
       - name: Lint
         run: pnpm lint
-      
+
       - name: Build
         run: pnpm build
 
@@ -358,7 +378,7 @@ jobs:
         with:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-      
+
       - name: Build mobile app
         run: eas build --platform all --non-interactive
 ```
@@ -366,17 +386,20 @@ jobs:
 ### Pipeline Stages
 
 1. **Validation**
+
    - Install dependencies
    - Run linting and type checking
    - Execute test suite
    - Verify build completion
 
 2. **Building**
+
    - Build all packages
    - Generate production artifacts
    - Create deployment packages
 
 3. **Deployment**
+
    - Deploy web app to hosting platform
    - Build mobile apps for app stores
    - Update CDN and static assets
@@ -391,6 +414,7 @@ jobs:
 ### Health Checks
 
 **Web Application:**
+
 ```bash
 # Health check endpoint
 curl https://connectstar.com/api/health
@@ -400,6 +424,7 @@ curl https://connectstar.com/api/metrics
 ```
 
 **Mobile Application:**
+
 - App store reviews and ratings
 - Crash reporting via Expo/Sentry
 - Performance metrics via analytics
@@ -407,12 +432,14 @@ curl https://connectstar.com/api/metrics
 ### Performance Monitoring
 
 **Web:**
+
 - **Core Web Vitals** monitoring
 - **Bundle size** tracking
 - **API response times**
 - **Error rate** monitoring
 
 **Mobile:**
+
 - **App startup time**
 - **Memory usage**
 - **Battery consumption**
@@ -421,6 +448,7 @@ curl https://connectstar.com/api/metrics
 ### Maintenance Tasks
 
 **Regular Updates:**
+
 ```bash
 # Update dependencies
 pnpm update
@@ -433,6 +461,7 @@ pnpm outdated
 ```
 
 **Database Migrations** (if applicable):
+
 ```bash
 # Run pending migrations
 npm run migrate
@@ -444,6 +473,7 @@ npm run backup
 ### Rollback Procedures
 
 **Web Rollback:**
+
 ```bash
 # Vercel rollback to previous deployment
 vercel rollback [deployment-url]
@@ -455,6 +485,7 @@ docker run -p 3000:3000 connect-star-web:previous-tag
 ```
 
 **Mobile Rollback:**
+
 - Release previous version through app stores
 - Use Expo Updates for emergency patches
 - Communicate with users about rollback
@@ -464,6 +495,7 @@ docker run -p 3000:3000 connect-star-web:previous-tag
 **Common Issues:**
 
 1. **Build Failures**
+
    ```bash
    # Clear cache and rebuild
    pnpm clean
@@ -473,6 +505,7 @@ docker run -p 3000:3000 connect-star-web:previous-tag
    ```
 
 2. **Environment Variables**
+
    ```bash
    # Verify environment configuration
    echo $NODE_ENV
@@ -480,10 +513,11 @@ docker run -p 3000:3000 connect-star-web:previous-tag
    ```
 
 3. **Mobile Build Issues**
+
    ```bash
    # Clear Expo cache
    expo start --clear
-   
+
    # Reset EAS build cache
    eas build --clear-cache
    ```
@@ -491,16 +525,19 @@ docker run -p 3000:3000 connect-star-web:previous-tag
 ### Support and Escalation
 
 **Monitoring Alerts:**
+
 - Set up alerts for error rates > 5%
 - Monitor response times > 2s
 - Track deployment success rates
 
 **Emergency Contacts:**
+
 - Development team lead
 - DevOps/Infrastructure team
 - Platform-specific support (Vercel, Expo)
 
 **Documentation:**
+
 - Keep runbooks updated
 - Document known issues and solutions
 - Maintain deployment checklists

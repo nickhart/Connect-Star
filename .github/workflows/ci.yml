@@ -55,12 +55,22 @@ jobs:
           fail_ci_if_error: false
 
   test-packages:
-    name: Test Individual Packages
+    name: Test Individual Packages (${{ matrix.name }})
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       matrix:
-        package: ["@connect-star/game-logic", "@connect-star/ui", "@connect-star/api-client", "@connect-star/mobile", "@connect-star/web"]
+        include:
+          - package: "@connect-star/game-logic"
+            name: "game-logic"
+          - package: "@connect-star/ui" 
+            name: "ui"
+          - package: "@connect-star/api-client"
+            name: "api-client"
+          - package: "@connect-star/mobile"
+            name: "mobile"
+          - package: "@connect-star/web"
+            name: "web"
 
     steps:
       - name: Checkout code

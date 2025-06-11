@@ -60,7 +60,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        package: [game-logic, ui, api-client, mobile, web]
+        package: [@connect-star/game-logic, @connect-star/ui, @connect-star/api-client, @connect-star/mobile, @connect-star/web]
 
     steps:
       - name: Checkout code

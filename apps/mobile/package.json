@@ -11,7 +11,7 @@
     "web": "expo start --web",
     "build": "tsc --noEmit",
     "type-check": "tsc --noEmit",
-    "lint": "eslint src/"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@connect-star/api-client": "workspace:*",
@@ -25,7 +25,11 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@types/react": "~19.0.14",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^9.28.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-native": "^5.0.0",
     "typescript": "^5.3.3"
   }
 }

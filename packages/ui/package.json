@@ -8,18 +8,20 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "type-check": "tsc --noEmit",
-    "lint": "eslint src/",
+    "lint": "eslint .",
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@connect-star/types": "workspace:*",
     "@connect-star/game-logic": "workspace:*",
+    "@connect-star/types": "workspace:*",
     "react": "18.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
     "@types/react": "^18.2.22",
-    "eslint": "^8.49.0"
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^9.28.0",
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "react": "18.2.0"

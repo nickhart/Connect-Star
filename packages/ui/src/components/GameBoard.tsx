@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Board, Player } from '@connect-star/types';
+import type { Board } from '@connect-star/types';
 import { ROWS, COLS } from '@connect-star/game-logic';
 
 interface GameBoardProps {

@@ -8,14 +8,16 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "type-check": "tsc --noEmit",
-    "lint": "eslint src/",
+    "lint": "eslint .",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "@connect-star/types": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "eslint": "^8.49.0"
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^8.49.0",
+    "typescript": "^5.2.2"
   }
 }

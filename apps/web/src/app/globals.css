@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Game Board Styles */
+.game-board {
+  @apply flex justify-center;
+}
+
+.board-grid {
+  @apply grid grid-cols-7 gap-1 bg-blue-600 p-4 rounded-lg;
+}
+
+.column-button {
+  @apply flex flex-col gap-1 p-2 rounded hover:bg-blue-500 transition-colors disabled:hover:bg-blue-600;
+}
+
+.cell {
+  @apply w-12 h-12 rounded-full border-2 border-blue-800 transition-all duration-200;
+}
+
+.cell-empty {
+  @apply bg-white;
+}
+
+.cell-red {
+  @apply bg-red-500 border-red-600 shadow-lg;
+}
+
+.cell-yellow {
+  @apply bg-yellow-400 border-yellow-500 shadow-lg;
+}
+
+/* Player Indicator Styles */
+.player-indicator {
+  @apply flex items-center gap-3 text-lg font-semibold;
+}
+
+.player-piece {
+  @apply w-8 h-8 rounded-full border-2;
+}
+
+.player-red {
+  @apply bg-red-500 border-red-600;
+}
+
+.player-yellow {
+  @apply bg-yellow-400 border-yellow-500;
+}
+
+.player-indicator.winner {
+  @apply text-green-600;
+}
+
+.player-indicator.current {
+  @apply text-gray-700;
+}
+
+/* Button Styles */
+.button {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.button-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.button-secondary {
+  @apply bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-500;
+}
+
+.button-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.button-small {
+  @apply px-3 py-1 text-sm;
+}
+
+.button-medium {
+  @apply px-4 py-2;
+}
+
+.button-large {
+  @apply px-6 py-3 text-lg;
+}
+
+.button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}

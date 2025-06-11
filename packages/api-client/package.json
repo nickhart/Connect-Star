@@ -1,0 +1,21 @@
+{
+  "name": "@connect-star/api-client",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@connect-star/types": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "eslint": "^8.49.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@connect-star/ui",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@connect-star/types": "workspace:*",
+    "@connect-star/game-logic": "workspace:*",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "@types/react": "^18.2.22",
+    "eslint": "^8.49.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

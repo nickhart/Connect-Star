@@ -41,10 +41,10 @@ jobs:
       - name: Format check
         run: pnpm format:check
 
-      - name: Test
+      - name: Test with coverage
         run: pnpm test:ci
 
-      - name: Build
+      - name: Build all packages
         run: pnpm build
 
       - name: Upload coverage to Codecov

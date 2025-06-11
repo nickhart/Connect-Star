@@ -34,16 +34,16 @@ Connect-Star/
 
 ### Technology Stack
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| **Build System** | Turborepo | Task orchestration, caching |
-| **Language** | TypeScript 5.2+ | Type safety, developer experience |
-| **Web Framework** | Next.js 14 | SSR, App Router, performance |
-| **Mobile Framework** | React Native + Expo 53 | Cross-platform mobile development |
-| **Styling** | Tailwind CSS | Utility-first CSS framework |
-| **Testing** | Jest + RTL | Unit, component, integration tests |
-| **Code Quality** | ESLint + Prettier | Linting, formatting |
-| **Package Manager** | pnpm | Fast, efficient dependency management |
+| Layer                | Technology             | Purpose                               |
+| -------------------- | ---------------------- | ------------------------------------- |
+| **Build System**     | Turborepo              | Task orchestration, caching           |
+| **Language**         | TypeScript 5.2+        | Type safety, developer experience     |
+| **Web Framework**    | Next.js 14             | SSR, App Router, performance          |
+| **Mobile Framework** | React Native + Expo 53 | Cross-platform mobile development     |
+| **Styling**          | Tailwind CSS           | Utility-first CSS framework           |
+| **Testing**          | Jest + RTL             | Unit, component, integration tests    |
+| **Code Quality**     | ESLint + Prettier      | Linting, formatting                   |
+| **Package Manager**  | pnpm                   | Fast, efficient dependency management |
 
 ### Package Dependencies
 
@@ -53,12 +53,12 @@ graph TD
     A --> C[packages/game-logic]
     A --> D[packages/api-client]
     A --> E[packages/types]
-    
+
     F[apps/mobile] --> B
     F --> C
     F --> D
     F --> E
-    
+
     B --> E
     C --> E
     D --> E
@@ -71,6 +71,7 @@ graph TD
 #### ✅ Completed Features
 
 **Core Game Logic:**
+
 - Board state management
 - Move validation and execution
 - Win condition detection (horizontal, vertical, diagonal)
@@ -78,12 +79,14 @@ graph TD
 - Edge case handling
 
 **User Interface:**
+
 - Interactive game board component
 - Player indicator with turn management
 - Responsive button components
 - Cross-platform compatibility
 
 **Development Infrastructure:**
+
 - Monorepo setup with Turborepo
 - Comprehensive testing suite (67 tests)
 - Code quality tools (ESLint, Prettier)
@@ -91,19 +94,22 @@ graph TD
 - Documentation and contribution guides
 
 **Testing Coverage:**
+
 - `game-logic`: 25 unit tests (80%+ coverage)
-- `ui`: 29 component tests (80%+ coverage)  
+- `ui`: 29 component tests (80%+ coverage)
 - `api-client`: 13 integration tests (75%+ coverage)
 - `mobile/web`: Smoke tests for basic functionality
 
 #### 🚧 In Progress
 
 **API Integration:**
+
 - WebSocket real-time communication
 - HTTP client for game management
 - Error handling and retry logic
 
 **Mobile Application:**
+
 - Touch-optimized gameplay
 - Native mobile components
 - Platform-specific optimizations
@@ -111,18 +117,21 @@ graph TD
 #### 📋 Planned Features
 
 **Multiplayer Support:**
+
 - Real-time game sessions
 - Player matchmaking
 - Game room management
 - Spectator mode
 
 **Enhanced UI/UX:**
+
 - Game animations and transitions
 - Sound effects and music
 - Accessibility improvements
 - Dark mode support
 
 **Additional Features:**
+
 - Game replay system
 - Statistics and leaderboards
 - AI opponent with difficulty levels
@@ -132,14 +141,14 @@ graph TD
 
 ### Test Coverage
 
-| Package | Tests | Coverage | Status |
-|---------|-------|----------|--------|
-| `game-logic` | 25 | 80%+ | ✅ |
-| `ui` | 29 | 80%+ | ✅ |
-| `api-client` | 13 | 75%+ | ✅ |
-| `mobile` | 1 | Basic | ⚠️ |
-| `web` | 1 | Basic | ⚠️ |
-| **Total** | **67** | **75%** | ✅ |
+| Package      | Tests  | Coverage | Status |
+| ------------ | ------ | -------- | ------ |
+| `game-logic` | 25     | 80%+     | ✅     |
+| `ui`         | 29     | 80%+     | ✅     |
+| `api-client` | 13     | 75%+     | ✅     |
+| `mobile`     | 1      | Basic    | ⚠️     |
+| `web`        | 1      | Basic    | ⚠️     |
+| **Total**    | **67** | **75%**  | ✅     |
 
 ### Code Quality
 
@@ -212,18 +221,21 @@ The project welcomes contributions! Please see:
 ### Contribution Areas
 
 **High Priority:**
+
 - Multiplayer functionality implementation
 - Mobile app feature parity
 - Performance optimizations
 - Accessibility improvements
 
 **Medium Priority:**
+
 - UI/UX enhancements
 - Additional test coverage
 - Documentation improvements
 - Developer experience tools
 
 **Low Priority:**
+
 - Advanced features (AI, tournaments)
 - Optimization and refactoring
 - Experimental features
@@ -254,18 +266,21 @@ The project welcomes contributions! Please see:
 ## Future Roadmap
 
 ### Short Term (1-3 months)
+
 - Complete multiplayer implementation
 - Mobile app deployment to app stores
 - Performance optimization
 - Accessibility compliance
 
 ### Medium Term (3-6 months)
+
 - AI opponent implementation
 - Advanced UI animations
 - Social features (friends, chat)
 - Analytics and metrics
 
 ### Long Term (6+ months)
+
 - Tournament system
 - Spectator mode
 - Mobile-specific features

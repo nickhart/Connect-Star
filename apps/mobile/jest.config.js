@@ -4,9 +4,7 @@ module.exports = {
   ...baseConfig,
   displayName: 'mobile',
   testEnvironment: 'node',
-  setupFilesAfterEnv: [
-    '<rootDir>/jest.setup.js',
-  ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },

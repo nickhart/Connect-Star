@@ -5,6 +5,7 @@ This document provides comprehensive information about the testing setup and pra
 ## Overview
 
 The Connect-Star project maintains high test coverage across all packages with **67 total tests** covering:
+
 - Unit tests for game logic
 - Component tests for UI elements
 - Integration tests for API communication
@@ -13,6 +14,7 @@ The Connect-Star project maintains high test coverage across all packages with *
 ## Test Configuration
 
 ### Framework
+
 - **Jest** - Primary testing framework
 - **React Testing Library** - Component testing
 - **React Native Testing Library** - Mobile component testing
@@ -20,17 +22,18 @@ The Connect-Star project maintains high test coverage across all packages with *
 
 ### Coverage Thresholds
 
-| Package | Branches | Functions | Lines | Statements |
-|---------|----------|-----------|-------|------------|
-| `game-logic` | 80% | 80% | 80% | 80% |
-| `ui` | 80% | 80% | 80% | 80% |
-| `api-client` | 75% | 75% | 75% | 75% |
-| `mobile` | 70% | 70% | 70% | 70% |
-| `web` | 70% | 70% | 70% | 70% |
+| Package      | Branches | Functions | Lines | Statements |
+| ------------ | -------- | --------- | ----- | ---------- |
+| `game-logic` | 80%      | 80%       | 80%   | 80%        |
+| `ui`         | 80%      | 80%       | 80%   | 80%        |
+| `api-client` | 75%      | 75%       | 75%   | 75%        |
+| `mobile`     | 70%      | 70%       | 70%   | 70%        |
+| `web`        | 70%      | 70%       | 70%   | 70%        |
 
 ## Running Tests
 
 ### All Tests
+
 ```bash
 # Run all tests
 pnpm test
@@ -43,6 +46,7 @@ pnpm test:ci
 ```
 
 ### Package-Specific Tests
+
 ```bash
 # Individual packages
 cd packages/game-logic && pnpm test
@@ -55,6 +59,7 @@ pnpm test --filter=ui
 ```
 
 ### Watch Mode
+
 ```bash
 # Watch mode for active development
 pnpm test --filter=game-logic -- --watch
@@ -68,6 +73,7 @@ pnpm test --filter=ui -- --watch --verbose
 **Focus**: Core game mechanics and business logic
 
 **Test Coverage**:
+
 - ✅ Board creation and state management
 - ✅ Move validation (bounds checking, column availability)
 - ✅ Win detection (horizontal, vertical, diagonal)
@@ -75,9 +81,11 @@ pnpm test --filter=ui -- --watch --verbose
 - ✅ Edge cases and error handling
 
 **Key Test Files**:
+
 - `src/__tests__/index.test.ts` - Main test suite
 
 **Example Test**:
+
 ```typescript
 describe('checkWinner', () => {
   it('should detect horizontal win', () => {
@@ -87,7 +95,7 @@ describe('checkWinner', () => {
     board[5][1] = 'red';
     board[5][2] = 'red';
     board[5][3] = 'red';
-    
+
     expect(checkWinner(board)).toBe('red');
   });
 });
@@ -98,6 +106,7 @@ describe('checkWinner', () => {
 **Focus**: Component behavior and user interactions
 
 **Test Coverage**:
+
 - ✅ Button component variants and states
 - ✅ GameBoard rendering and click handling
 - ✅ PlayerIndicator display logic
@@ -105,17 +114,19 @@ describe('checkWinner', () => {
 - ✅ Prop validation and edge cases
 
 **Key Test Files**:
+
 - `src/__tests__/components/Button.test.tsx`
 - `src/__tests__/components/GameBoard.test.tsx`
 - `src/__tests__/components/PlayerIndicator.test.tsx`
 
 **Example Test**:
+
 ```typescript
 describe('GameBoard', () => {
   it('should render empty board correctly', () => {
     const board = createTestBoard();
     render(<GameBoard board={board} />);
-    
+
     const gameBoard = screen.getByLabelText('Drop piece in column 1')
       .closest('.game-board');
     expect(gameBoard).toBeInTheDocument();
@@ -128,6 +139,7 @@ describe('GameBoard', () => {
 **Focus**: HTTP and WebSocket communication
 
 **Test Coverage**:
+
 - ✅ Client initialization and configuration
 - ✅ HTTP request methods (createRoom, joinRoom, makeMove)
 - ✅ WebSocket connection management
@@ -135,15 +147,17 @@ describe('GameBoard', () => {
 - ✅ Error handling and edge cases
 
 **Key Test Files**:
+
 - `src/__tests__/index.test.ts` - Complete API client test suite
 
 **Example Test**:
+
 ```typescript
 describe('WebSocket connection', () => {
   it('should connect to WebSocket successfully', () => {
     const client = new ConnectStarApiClient('http://localhost:3000');
     client.connect();
-    
+
     expect(mockWebSocket).toHaveBeenCalledWith('ws://localhost:3000');
   });
 });
@@ -154,22 +168,24 @@ describe('WebSocket connection', () => {
 **Focus**: Basic application functionality
 
 **Test Coverage**:
+
 - ✅ Smoke tests to ensure apps can be instantiated
 - ✅ Basic rendering without errors
 
 ## Testing Best Practices
 
 ### Test Structure
+
 ```typescript
 describe('Component/Function Name', () => {
   describe('specific behavior', () => {
     it('should do something specific', () => {
       // Arrange
       const input = setupTestData();
-      
+
       // Act
       const result = functionUnderTest(input);
-      
+
       // Assert
       expect(result).toBe(expectedValue);
     });
@@ -178,6 +194,7 @@ describe('Component/Function Name', () => {
 ```
 
 ### Component Testing
+
 ```typescript
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Component } from '../Component';
@@ -186,9 +203,9 @@ describe('Component', () => {
   it('should handle user interaction', () => {
     const mockHandler = jest.fn();
     render(<Component onAction={mockHandler} />);
-    
+
     fireEvent.click(screen.getByRole('button'));
-    
+
     expect(mockHandler).toHaveBeenCalledWith(expectedArgs);
   });
 });
@@ -197,14 +214,16 @@ describe('Component', () => {
 ### Mocking Guidelines
 
 **Global Mocks** (for APIs):
+
 ```typescript
 // @ts-ignore
 global.fetch = jest.fn();
-// @ts-ignore  
+// @ts-ignore
 global.WebSocket = jest.fn();
 ```
 
 **Module Mocks**:
+
 ```typescript
 jest.mock('expo-status-bar', () => ({
   StatusBar: 'StatusBar',
@@ -214,12 +233,15 @@ jest.mock('expo-status-bar', () => ({
 ## Continuous Integration
 
 ### Pre-commit Checks
+
 Tests run automatically on:
+
 - Commit (via git hooks)
 - Pull request creation
 - CI/CD pipeline
 
 ### CI Configuration
+
 ```bash
 # Full test suite with coverage
 pnpm test:ci
@@ -234,6 +256,7 @@ pnpm lint
 ## Coverage Reports
 
 ### Generating Reports
+
 ```bash
 # Generate HTML coverage report
 pnpm test:coverage
@@ -243,6 +266,7 @@ open coverage/lcov-report/index.html
 ```
 
 ### Coverage Files
+
 - `coverage/` - HTML reports and LCOV data
 - `coverage/lcov-report/index.html` - Main coverage dashboard
 
@@ -251,14 +275,17 @@ open coverage/lcov-report/index.html
 ### Common Issues
 
 **Jest Configuration**:
+
 - Ensure `jest.config.js` extends base configuration
 - Check `setupFilesAfterEnv` paths are correct
 
 **React Testing Library**:
+
 - Use `screen.debug()` to inspect rendered output
 - Prefer semantic queries (`getByRole`, `getByLabelText`)
 
 **Async Testing**:
+
 ```typescript
 // Wait for elements
 await waitFor(() => {
@@ -270,6 +297,7 @@ await waitForElementToBeRemoved(() => screen.queryByText('Loading...'));
 ```
 
 ### Debug Commands
+
 ```bash
 # Verbose output
 pnpm test --filter=package-name -- --verbose
@@ -284,6 +312,7 @@ pnpm test --filter=package-name -- --detectOpenHandles --forceExit
 ## Adding New Tests
 
 ### Test File Structure
+
 ```
 packages/package-name/
 ├── src/
@@ -299,6 +328,7 @@ packages/package-name/
 ```
 
 ### Test Naming Convention
+
 - Test files: `*.test.ts` or `*.test.tsx`
 - Test directories: `__tests__/`
 - Describe blocks: Use the component/function name
@@ -307,13 +337,16 @@ packages/package-name/
 ## Performance
 
 ### Parallel Execution
+
 Tests run in parallel across packages using Turborepo:
+
 ```bash
 # All packages run simultaneously
 pnpm test  # Runs: game-logic, ui, api-client, mobile, web
 ```
 
 ### Test Optimization
+
 - Tests cached by Turborepo based on source changes
 - Only affected packages re-run tests
 - Coverage reports generated incrementally

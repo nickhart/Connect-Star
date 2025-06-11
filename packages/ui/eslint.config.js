@@ -25,6 +25,17 @@ module.exports = [
         console: 'readonly',
         React: 'readonly',
         HTMLButtonElement: 'readonly',
+        global: 'readonly',
+        // Jest globals
+        describe: 'readonly',
+        test: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        jest: 'readonly',
       },
     },
     plugins: {
@@ -43,6 +54,8 @@ module.exports = [
         module: 'readonly',
         require: 'readonly',
         exports: 'readonly',
+        global: 'readonly',
+        jest: 'readonly',
       },
     },
     plugins: {

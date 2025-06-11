@@ -17,6 +17,7 @@ Welcome to the Connect-Star project! This guide will help you understand our dev
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - **Node.js** 18+ (LTS recommended)
 - **pnpm** 10+ (package manager)
 - **Git** for version control
@@ -87,6 +88,7 @@ type(scope): description
 ```
 
 **Types:**
+
 - `feat` - New features
 - `fix` - Bug fixes
 - `docs` - Documentation changes
@@ -96,6 +98,7 @@ type(scope): description
 - `chore` - Maintenance tasks
 
 **Examples:**
+
 ```bash
 feat(game-logic): add diagonal win detection
 fix(ui): resolve button state inconsistency
@@ -108,6 +111,7 @@ test(api-client): increase coverage for error handling
 ### TypeScript Guidelines
 
 **Type Safety:**
+
 ```typescript
 // ✅ Good - Explicit types
 interface GameState {
@@ -121,6 +125,7 @@ const gameData: any = getData();
 ```
 
 **Naming Conventions:**
+
 - `PascalCase` for types, interfaces, components
 - `camelCase` for variables, functions
 - `SCREAMING_SNAKE_CASE` for constants
@@ -129,6 +134,7 @@ const gameData: any = getData();
 ### React Component Guidelines
 
 **Component Structure:**
+
 ```typescript
 // ✅ Good component structure
 interface ButtonProps {
@@ -138,14 +144,14 @@ interface ButtonProps {
   children: React.ReactNode;
 }
 
-export function Button({ 
-  variant = 'primary', 
-  size = 'medium', 
-  onClick, 
-  children 
+export function Button({
+  variant = 'primary',
+  size = 'medium',
+  onClick,
+  children
 }: ButtonProps) {
   return (
-    <button 
+    <button
       className={`button button-${variant} button-${size}`}
       onClick={onClick}
     >
@@ -156,6 +162,7 @@ export function Button({
 ```
 
 **Props and State:**
+
 - Always define TypeScript interfaces for props
 - Use default parameters for optional props
 - Prefer composition over inheritance
@@ -180,6 +187,7 @@ pnpm lint --fix
 ```
 
 **Prettier Configuration:**
+
 - 2 spaces for indentation
 - Single quotes for strings
 - Semicolons required
@@ -208,30 +216,31 @@ import './GameBoard.css';
 
 All contributions must maintain test coverage thresholds:
 
-| Package | Min Coverage |
-|---------|--------------|
-| `game-logic` | 80% |
-| `ui` | 80% |
-| `api-client` | 75% |
-| `mobile` | 70% |
-| `web` | 70% |
+| Package      | Min Coverage |
+| ------------ | ------------ |
+| `game-logic` | 80%          |
+| `ui`         | 80%          |
+| `api-client` | 75%          |
+| `mobile`     | 70%          |
+| `web`        | 70%          |
 
 ### Writing Tests
 
 **Unit Tests (game-logic):**
+
 ```typescript
 describe('makeMove', () => {
   it('should place piece in correct position', () => {
     const board = createEmptyBoard();
     const result = makeMove(board, 0, 'red');
-    
+
     expect(result.board[5][0]).toBe('red');
     expect(result.isValid).toBe(true);
   });
-  
+
   it('should reject invalid column', () => {
     const board = createEmptyBoard();
-    
+
     expect(() => makeMove(board, -1, 'red')).toThrow();
     expect(() => makeMove(board, 7, 'red')).toThrow();
   });
@@ -239,16 +248,17 @@ describe('makeMove', () => {
 ```
 
 **Component Tests (ui):**
+
 ```typescript
 describe('GameBoard', () => {
   it('should handle column clicks', () => {
     const mockOnColumnClick = jest.fn();
     const board = createTestBoard();
-    
+
     render(<GameBoard board={board} onColumnClick={mockOnColumnClick} />);
-    
+
     fireEvent.click(screen.getByLabelText('Drop piece in column 1'));
-    
+
     expect(mockOnColumnClick).toHaveBeenCalledWith(0);
   });
 });
@@ -275,11 +285,13 @@ pnpm test --filter=ui -- --watch
 ### Before Creating a PR
 
 1. **Ensure all tests pass:**
+
    ```bash
    pnpm test
    ```
 
 2. **Check code quality:**
+
    ```bash
    pnpm lint
    pnpm type-check
@@ -304,21 +316,25 @@ pnpm test --filter=ui -- --watch
 
 ```markdown
 ## Description
+
 Brief description of the changes and their purpose.
 
 ## Type of Change
+
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Component tests added/updated
 - [ ] Integration tests added/updated
 - [ ] Manual testing performed
 
 ## Checklist
+
 - [ ] Code follows the project's coding standards
 - [ ] Self-review of code completed
 - [ ] Comments added to hard-to-understand areas
@@ -360,12 +376,12 @@ graph TD
     A --> C[packages/game-logic]
     A --> D[packages/api-client]
     A --> E[packages/types]
-    
+
     F[apps/mobile] --> B
     F --> C
     F --> D
     F --> E
-    
+
     B --> E
     C --> E
     D --> E
@@ -374,17 +390,20 @@ graph TD
 ### Adding New Packages
 
 1. **Create package directory:**
+
    ```bash
    mkdir packages/new-package
    cd packages/new-package
    ```
 
 2. **Initialize package:**
+
    ```bash
    npm init -y
    ```
 
 3. **Update package.json:**
+
    ```json
    {
      "name": "@connect-star/new-package",
@@ -402,6 +421,7 @@ graph TD
 ### Common Issues
 
 **Build Failures:**
+
 ```bash
 # Clear all build artifacts
 pnpm clean
@@ -415,6 +435,7 @@ pnpm build
 ```
 
 **Test Failures:**
+
 ```bash
 # Run tests with verbose output
 pnpm test -- --verbose
@@ -427,6 +448,7 @@ pnpm test -- --clearCache
 ```
 
 **Type Errors:**
+
 ```bash
 # Check types across all packages
 pnpm type-check
@@ -436,6 +458,7 @@ cd packages/package-name && pnpm type-check
 ```
 
 **Mobile Development:**
+
 ```bash
 # Clear Expo cache
 expo start --clear
@@ -454,16 +477,19 @@ npx react-native start --reset-cache
 ### Development Tips
 
 **Performance:**
+
 - Use Turborepo caching: `turbo build --cache`
 - Run only affected packages: `pnpm build --filter=changed`
 - Use watch mode for active development
 
 **Debugging:**
+
 - Use React DevTools for component debugging
 - Use Chrome DevTools for mobile debugging via Expo
 - Add `console.log` statements sparingly and remove before commit
 
 **IDE Setup:**
+
 - Install TypeScript and ESLint extensions
 - Configure format on save with Prettier
 - Enable type checking in your editor
@@ -494,6 +520,7 @@ New to open source? Welcome! Here's how to get started:
 ### Good First Issues
 
 Look for issues labeled with:
+
 - `good-first-issue` - Perfect for newcomers
 - `documentation` - Help improve our docs
 - `enhancement` - Small feature additions
@@ -502,6 +529,7 @@ Look for issues labeled with:
 ## Questions?
 
 If you have questions about contributing, please:
+
 1. Check this documentation first
 2. Search existing issues and discussions
 3. Open a new issue with the "question" label
@@ -510,6 +538,7 @@ If you have questions about contributing, please:
 ## Recognition
 
 All contributors will be recognized in our project! Contributions include:
+
 - Code contributions
 - Documentation improvements
 - Bug reports and feature requests

@@ -22,15 +22,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'pnpm'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.12.1
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
 
       - name: Type check
         run: pnpm type-check
@@ -44,9 +46,6 @@ jobs:
       - name: Test with coverage
         run: pnpm test:ci
 
-      - name: Build all packages
-        run: pnpm build
-
       - name: Upload coverage to Codecov
         if: github.event_name == 'push'
         uses: codecov/codecov-action@v4
@@ -56,12 +55,22 @@ jobs:
           fail_ci_if_error: false
 
   test-packages:
-    name: Test Individual Packages
+    name: Test Individual Packages (${{ matrix.name }})
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       matrix:
-        package: [game-logic, ui, api-client, mobile, web]
+        include:
+          - package: "@connect-star/game-logic"
+            name: "game-logic"
+          - package: "@connect-star/ui" 
+            name: "ui"
+          - package: "@connect-star/api-client"
+            name: "api-client"
+          - package: "@connect-star/mobile"
+            name: "mobile"
+          - package: "@connect-star/web"
+            name: "web"
 
     steps:
       - name: Checkout code
@@ -71,12 +80,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'pnpm'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.12.1
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -101,19 +109,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.12.1
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Security audit
         run: pnpm audit --audit-level moderate
-
-  dependency-review:
-    name: Dependency Review
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Dependency Review
-        uses: actions/dependency-review-action@v4

@@ -12,9 +12,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@connect-star/types": "workspace:*",
-    "@connect-star/game-logic": "workspace:*",
-    "react": "^18.2.0"
+    "@connect-star/types": "file:../types",
+    "@connect-star/game-logic": "file:../game-logic",
+    "react": "18.2.0"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
@@ -22,6 +22,6 @@
     "eslint": "^8.49.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "18.2.0"
   }
 }

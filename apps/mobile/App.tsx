@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { registerRootComponent } from 'expo';
 import GameScreen from './src/screens/GameScreen';
 
-export default function App() {
+function App() {
   return (
     <View style={styles.container}>
       <GameScreen />
@@ -17,3 +18,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default registerRootComponent(App);

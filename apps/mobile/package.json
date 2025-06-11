@@ -13,9 +13,9 @@
     "lint": "eslint src/"
   },
   "dependencies": {
-    "@connect-star/types": "file:../../packages/types",
-    "@connect-star/game-logic": "file:../../packages/game-logic",
-    "@connect-star/api-client": "file:../../packages/api-client",
+    "@connect-star/types": "workspace:*",
+    "@connect-star/game-logic": "workspace:*",
+    "@connect-star/api-client": "workspace:*",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",

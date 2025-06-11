@@ -12,7 +12,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@connect-star/types": "file:../types"
+    "@connect-star/types": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.2.2",

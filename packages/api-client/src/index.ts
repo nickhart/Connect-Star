@@ -1,16 +1,17 @@
-import type { 
-  ApiResponse, 
-  GameRoom, 
-  CreateRoomRequest, 
-  JoinRoomRequest, 
+import type {
+  ApiResponse,
+  GameRoom,
+  CreateRoomRequest,
+  JoinRoomRequest,
   MakeMoveRequest,
-  GameEvent 
+  GameEvent,
 } from '@connect-star/types';
 
 export class ConnectStarApiClient {
   private baseUrl: string;
   private ws: WebSocket | null = null;
-  private eventListeners: Map<string, ((event: GameEvent) => void)[]> = new Map();
+  private eventListeners: Map<string, ((event: GameEvent) => void)[]> =
+    new Map();
 
   constructor(baseUrl: string = 'http://localhost:3001') {
     this.baseUrl = baseUrl;
@@ -29,13 +30,16 @@ export class ConnectStarApiClient {
   }
 
   async joinRoom(request: JoinRoomRequest): Promise<ApiResponse<GameRoom>> {
-    const response = await fetch(`${this.baseUrl}/api/rooms/${request.roomId}/join`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ playerName: request.playerName }),
-    });
+    const response = await fetch(
+      `${this.baseUrl}/api/rooms/${request.roomId}/join`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ playerName: request.playerName }),
+      }
+    );
 
     return response.json();
   }
@@ -46,13 +50,16 @@ export class ConnectStarApiClient {
   }
 
   async makeMove(request: MakeMoveRequest): Promise<ApiResponse<GameRoom>> {
-    const response = await fetch(`${this.baseUrl}/api/rooms/${request.roomId}/move`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ col: request.col }),
-    });
+    const response = await fetch(
+      `${this.baseUrl}/api/rooms/${request.roomId}/move`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ col: request.col }),
+      }
+    );
 
     return response.json();
   }
@@ -61,7 +68,7 @@ export class ConnectStarApiClient {
     const wsUrl = this.baseUrl.replace('http', 'ws');
     this.ws = new WebSocket(`${wsUrl}/ws/${roomId}`);
 
-    this.ws.onmessage = (event) => {
+    this.ws.onmessage = event => {
       try {
         const gameEvent: GameEvent = JSON.parse(event.data);
         this.notifyListeners(gameEvent.type, gameEvent);
@@ -70,7 +77,7 @@ export class ConnectStarApiClient {
       }
     };
 
-    this.ws.onerror = (error) => {
+    this.ws.onerror = error => {
       console.error('WebSocket error:', error);
     };
 
@@ -86,14 +93,20 @@ export class ConnectStarApiClient {
     }
   }
 
-  addEventListener(eventType: string, listener: (event: GameEvent) => void): void {
+  addEventListener(
+    eventType: string,
+    listener: (event: GameEvent) => void
+  ): void {
     if (!this.eventListeners.has(eventType)) {
       this.eventListeners.set(eventType, []);
     }
     this.eventListeners.get(eventType)!.push(listener);
   }
 
-  removeEventListener(eventType: string, listener: (event: GameEvent) => void): void {
+  removeEventListener(
+    eventType: string,
+    listener: (event: GameEvent) => void
+  ): void {
     const listeners = this.eventListeners.get(eventType);
     if (listeners) {
       const index = listeners.indexOf(listener);

@@ -7,11 +7,13 @@ import PlayerIndicator from '../components/PlayerIndicator';
 import Button from '../components/Button';
 
 export default function GameScreen() {
-  const [gameState, setGameState] = useState<GameState>(createInitialGameState());
+  const [gameState, setGameState] = useState<GameState>(
+    createInitialGameState()
+  );
 
   const handleColumnPress = (col: number) => {
     if (gameState.status !== 'playing') return;
-    
+
     try {
       const newGameState = makeMove(gameState, col);
       setGameState(newGameState);
@@ -32,7 +34,7 @@ export default function GameScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>Connect Star</Text>
-        
+
         {gameState.status === 'waiting' && (
           <View style={styles.waitingContainer}>
             <Button title="Start Game" onPress={startNewGame} />
@@ -41,7 +43,7 @@ export default function GameScreen() {
 
         {gameState.status !== 'waiting' && (
           <>
-            <PlayerIndicator 
+            <PlayerIndicator
               currentPlayer={gameState.currentPlayer}
               winner={gameState.winner}
             />
@@ -53,7 +55,11 @@ export default function GameScreen() {
             />
 
             <View style={styles.buttonContainer}>
-              <Button title="Reset Game" onPress={resetGame} variant="secondary" />
+              <Button
+                title="Reset Game"
+                onPress={resetGame}
+                variant="secondary"
+              />
               {gameState.status === 'finished' && (
                 <Button title="New Game" onPress={startNewGame} />
               )}

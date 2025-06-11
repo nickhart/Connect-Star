@@ -1,9 +1,12 @@
 const js = require('@eslint/js');
 const tseslint = require('@typescript-eslint/eslint-plugin');
 const tsParser = require('@typescript-eslint/parser');
+const prettier = require('eslint-plugin-prettier');
+const prettierConfig = require('eslint-config-prettier');
 
 module.exports = [
   js.configs.recommended,
+  prettierConfig,
   {
     ignores: ['dist/**', 'node_modules/**', '*.config.js'],
   },
@@ -25,9 +28,11 @@ module.exports = [
     },
     plugins: {
       '@typescript-eslint': tseslint,
+      prettier,
     },
     rules: {
       ...tseslint.configs.recommended.rules,
+      'prettier/prettier': 'error',
     },
   },
   {
@@ -38,6 +43,12 @@ module.exports = [
         require: 'readonly',
         process: 'readonly',
       },
+    },
+    plugins: {
+      prettier,
+    },
+    rules: {
+      'prettier/prettier': 'error',
     },
   },
 ];

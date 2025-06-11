@@ -4,7 +4,9 @@ export const ROWS = 6;
 export const COLS = 7;
 
 export function createEmptyBoard(): Board {
-  return Array(ROWS).fill(null).map(() => Array(COLS).fill(null));
+  return Array(ROWS)
+    .fill(null)
+    .map(() => Array(COLS).fill(null));
 }
 
 export function createInitialGameState(): GameState {
@@ -29,7 +31,7 @@ export function makeMove(gameState: GameState, col: number): GameState {
   }
 
   const newBoard = gameState.board.map(row => [...row]);
-  
+
   let row = ROWS - 1;
   while (row >= 0 && newBoard[row][col] !== null) {
     row--;
@@ -51,20 +53,24 @@ export function makeMove(gameState: GameState, col: number): GameState {
   };
 }
 
-export function checkWinner(board: Board, row: number, col: number): Player | null {
+export function checkWinner(
+  board: Board,
+  row: number,
+  col: number
+): Player | null {
   const player = board[row][col];
   if (!player) return null;
 
   const directions = [
-    [0, 1],   // horizontal
-    [1, 0],   // vertical
-    [1, 1],   // diagonal /
-    [1, -1],  // diagonal \
+    [0, 1], // horizontal
+    [1, 0], // vertical
+    [1, 1], // diagonal /
+    [1, -1], // diagonal \
   ];
 
   for (const [dx, dy] of directions) {
     let count = 1;
-    
+
     // Check positive direction
     let r = row + dx;
     let c = col + dy;
@@ -73,7 +79,7 @@ export function checkWinner(board: Board, row: number, col: number): Player | nu
       r += dx;
       c += dy;
     }
-    
+
     // Check negative direction
     r = row - dx;
     c = col - dy;
@@ -82,7 +88,7 @@ export function checkWinner(board: Board, row: number, col: number): Player | nu
       r -= dx;
       c -= dy;
     }
-    
+
     if (count >= 4) {
       return player;
     }

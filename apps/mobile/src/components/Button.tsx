@@ -8,7 +8,12 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export default function Button({ title, onPress, variant = 'primary', disabled = false }: ButtonProps) {
+export default function Button({
+  title,
+  onPress,
+  variant = 'primary',
+  disabled = false,
+}: ButtonProps) {
   return (
     <TouchableOpacity
       style={[
@@ -19,11 +24,13 @@ export default function Button({ title, onPress, variant = 'primary', disabled =
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={[
-        styles.buttonText,
-        variant === 'primary' ? styles.primaryText : styles.secondaryText,
-        disabled && styles.disabledText,
-      ]}>
+      <Text
+        style={[
+          styles.buttonText,
+          variant === 'primary' ? styles.primaryText : styles.secondaryText,
+          disabled && styles.disabledText,
+        ]}
+      >
         {title}
       </Text>
     </TouchableOpacity>

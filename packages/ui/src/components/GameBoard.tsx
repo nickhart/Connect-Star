@@ -9,7 +9,12 @@ interface GameBoardProps {
   className?: string;
 }
 
-export function GameBoard({ board, onColumnClick, disabled = false, className = '' }: GameBoardProps) {
+export function GameBoard({
+  board,
+  onColumnClick,
+  disabled = false,
+  className = '',
+}: GameBoardProps) {
   return (
     <div className={`game-board ${className}`}>
       <div className="board-grid">

@@ -7,11 +7,19 @@ interface PlayerIndicatorProps {
   winner?: Player | null;
 }
 
-export default function PlayerIndicator({ currentPlayer, winner }: PlayerIndicatorProps) {
+export default function PlayerIndicator({
+  currentPlayer,
+  winner,
+}: PlayerIndicatorProps) {
   if (winner) {
     return (
       <View style={styles.container}>
-        <View style={[styles.piece, winner === 'red' ? styles.redPiece : styles.yellowPiece]} />
+        <View
+          style={[
+            styles.piece,
+            winner === 'red' ? styles.redPiece : styles.yellowPiece,
+          ]}
+        />
         <Text style={[styles.text, styles.winnerText]}>
           Player {winner} wins!
         </Text>
@@ -21,10 +29,13 @@ export default function PlayerIndicator({ currentPlayer, winner }: PlayerIndicat
 
   return (
     <View style={styles.container}>
-      <View style={[styles.piece, currentPlayer === 'red' ? styles.redPiece : styles.yellowPiece]} />
-      <Text style={styles.text}>
-        Player {currentPlayer}'s turn
-      </Text>
+      <View
+        style={[
+          styles.piece,
+          currentPlayer === 'red' ? styles.redPiece : styles.yellowPiece,
+        ]}
+      />
+      <Text style={styles.text}>Player {currentPlayer}'s turn</Text>
     </View>
   );
 }

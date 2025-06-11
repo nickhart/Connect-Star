@@ -9,7 +9,9 @@
     "dev": "tsc --watch",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@connect-star/game-logic": "workspace:*",
@@ -21,6 +23,9 @@
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
     "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
+    "prettier": "^3.5.3",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {

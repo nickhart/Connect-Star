@@ -9,7 +9,11 @@ interface GameBoardProps {
   disabled?: boolean;
 }
 
-export default function GameBoard({ board, onColumnPress, disabled = false }: GameBoardProps) {
+export default function GameBoard({
+  board,
+  onColumnPress,
+  disabled = false,
+}: GameBoardProps) {
   return (
     <View style={styles.container}>
       <View style={styles.board}>

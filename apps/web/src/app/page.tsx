@@ -1,31 +1,33 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { GameBoard, PlayerIndicator, Button } from '@connect-star/ui'
-import { createInitialGameState, makeMove } from '@connect-star/game-logic'
-import type { GameState } from '@connect-star/types'
+import { useState } from 'react';
+import { GameBoard, PlayerIndicator, Button } from '@connect-star/ui';
+import { createInitialGameState, makeMove } from '@connect-star/game-logic';
+import type { GameState } from '@connect-star/types';
 
 export default function Home() {
-  const [gameState, setGameState] = useState<GameState>(createInitialGameState())
+  const [gameState, setGameState] = useState<GameState>(
+    createInitialGameState()
+  );
 
   const handleColumnClick = (col: number) => {
-    if (gameState.status !== 'playing') return
-    
+    if (gameState.status !== 'playing') return;
+
     try {
-      const newGameState = makeMove(gameState, col)
-      setGameState(newGameState)
+      const newGameState = makeMove(gameState, col);
+      setGameState(newGameState);
     } catch (error) {
-      console.error('Invalid move:', error)
+      console.error('Invalid move:', error);
     }
-  }
+  };
 
   const startNewGame = () => {
-    setGameState({ ...createInitialGameState(), status: 'playing' })
-  }
+    setGameState({ ...createInitialGameState(), status: 'playing' });
+  };
 
   const resetGame = () => {
-    setGameState(createInitialGameState())
-  }
+    setGameState(createInitialGameState());
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center p-4">
@@ -33,7 +35,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
           Connect Star
         </h1>
-        
+
         {gameState.status === 'waiting' && (
           <div className="text-center mb-8">
             <Button onClick={startNewGame} size="large">
@@ -45,7 +47,7 @@ export default function Home() {
         {gameState.status !== 'waiting' && (
           <>
             <div className="mb-6">
-              <PlayerIndicator 
+              <PlayerIndicator
                 currentPlayer={gameState.currentPlayer}
                 winner={gameState.winner}
                 className="justify-center"
@@ -64,14 +66,12 @@ export default function Home() {
                 Reset Game
               </Button>
               {gameState.status === 'finished' && (
-                <Button onClick={startNewGame}>
-                  New Game
-                </Button>
+                <Button onClick={startNewGame}>New Game</Button>
               )}
             </div>
           </>
         )}
       </div>
     </main>
-  )
+  );
 }

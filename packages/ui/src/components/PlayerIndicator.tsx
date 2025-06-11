@@ -7,7 +7,11 @@ interface PlayerIndicatorProps {
   className?: string;
 }
 
-export function PlayerIndicator({ currentPlayer, winner, className = '' }: PlayerIndicatorProps) {
+export function PlayerIndicator({
+  currentPlayer,
+  winner,
+  className = '',
+}: PlayerIndicatorProps) {
   if (winner) {
     return (
       <div className={`player-indicator winner ${className}`}>

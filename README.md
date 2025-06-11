@@ -28,12 +28,14 @@ Connect-Star/
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd Connect-Star
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -41,27 +43,31 @@ npm install
 ### Development
 
 Start all applications in development mode:
+
 ```bash
 npm run dev
 ```
 
 Start specific applications:
+
 ```bash
 # Web app only
 npm run dev --filter=@connect-star/web
 
-# Mobile app only  
+# Mobile app only
 npm run dev --filter=@connect-star/mobile
 ```
 
 ### Building
 
 Build all packages and applications:
+
 ```bash
 npm run build
 ```
 
 Build specific packages:
+
 ```bash
 npm run build --filter=@connect-star/game-logic
 ```
@@ -69,33 +75,43 @@ npm run build --filter=@connect-star/game-logic
 ## Package Details
 
 ### @connect-star/types
+
 TypeScript definitions for the Connect Four game, including game state, player types, and API interfaces.
 
-### @connect-star/game-logic  
+### @connect-star/game-logic
+
 Core game logic including:
+
 - Board management
 - Move validation
 - Win condition checking
 - Game state transitions
 
 ### @connect-star/ui
+
 Shared React components:
+
 - GameBoard component
-- PlayerIndicator component  
+- PlayerIndicator component
 - Button component
 
 ### @connect-star/api-client
+
 HTTP client for server communication with WebSocket support for real-time gameplay.
 
 ### @connect-star/web
+
 Next.js 14 web application with:
+
 - App Router
 - TypeScript
 - Tailwind CSS
 - Responsive design
 
 ### @connect-star/mobile
+
 React Native app with Expo featuring:
+
 - Cross-platform compatibility
 - Native mobile UI components
 - Touch-optimized gameplay

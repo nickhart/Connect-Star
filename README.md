@@ -13,6 +13,7 @@
 
 [![Tests](https://img.shields.io/badge/Tests-67%20passing-brightgreen)](docs/TESTING.md)
 [![Coverage](https://img.shields.io/badge/Coverage-75%25-yellow)](#testing)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Code Style](https://img.shields.io/badge/Code%20Style-Prettier-ff69b4?logo=prettier)](https://prettier.io/)
 [![Linting](https://img.shields.io/badge/Linting-ESLint-4B32C3?logo=eslint)](https://eslint.org/)
 
@@ -182,11 +183,25 @@ React Native with Expo:
 
 ## 🤝 Contributing
 
+We welcome contributions from the community! This project is open source and we encourage:
+
+- 🐛 **Bug reports** - Help us identify and fix issues
+- ✨ **Feature requests** - Suggest new functionality  
+- 📖 **Documentation** - Improve guides and examples
+- 🧪 **Testing** - Add test coverage and find edge cases
+- 💻 **Code contributions** - Implement features and fixes
+
+**Getting Started:**
 1. Read the [Contributing Guide](docs/CONTRIBUTING.md)
-2. Follow the established code style and testing practices
-3. Ensure all tests pass: `pnpm test`
-4. Verify code quality: `pnpm lint && pnpm type-check`
+2. Look for [`good-first-issue`](https://github.com/username/Connect-Star/labels/good-first-issue) labels
+3. Follow the established code style and testing practices
+4. Ensure all tests pass: `pnpm test`
+5. Verify code quality: `pnpm lint && pnpm type-check`
 
 ## 📄 License
 
-This project is private and proprietary.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ⭐ Support
+
+If you find this project helpful, please consider giving it a star on GitHub!

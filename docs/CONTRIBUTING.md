@@ -470,18 +470,50 @@ npx react-native start --reset-cache
 
 ## Code of Conduct
 
+We are committed to providing a welcoming and inclusive environment for all contributors. By participating in this project, you agree to abide by our community standards:
+
 - **Be respectful** in all interactions
 - **Provide constructive feedback** during code reviews
 - **Ask questions** when unsure about requirements
 - **Help others** learn and grow
 - **Follow established patterns** unless proposing improvements
+- **Welcome newcomers** and help them get started
+- **Give credit** where credit is due
+
+## First-Time Contributors
+
+New to open source? Welcome! Here's how to get started:
+
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally: `git clone https://github.com/YOUR_USERNAME/Connect-Star.git`
+3. **Set up the development environment** following the instructions above
+4. **Look for "good first issue" labels** in the Issues tab
+5. **Start small** - documentation fixes and small features are great first contributions
+6. **Ask for help** - don't hesitate to ask questions in issues or discussions
+
+### Good First Issues
+
+Look for issues labeled with:
+- `good-first-issue` - Perfect for newcomers
+- `documentation` - Help improve our docs
+- `enhancement` - Small feature additions
+- `bug` - Bug fixes (usually well-defined scope)
 
 ## Questions?
 
 If you have questions about contributing, please:
 1. Check this documentation first
 2. Search existing issues and discussions
-3. Ask in team communication channels
-4. Create an issue for documentation improvements
+3. Open a new issue with the "question" label
+4. Join our community discussions
+
+## Recognition
+
+All contributors will be recognized in our project! Contributions include:
+- Code contributions
+- Documentation improvements
+- Bug reports and feature requests
+- Community support and help
+- Testing and feedback
 
 Thank you for contributing to Connect-Star! 🔴🟡

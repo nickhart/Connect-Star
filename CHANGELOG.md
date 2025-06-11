@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Comprehensive documentation (README, contributing guide, testing guide)
-- Architecture Decision Records (ADRs) for key technical decisions
-- Deployment guide with CI/CD pipeline documentation
+- MIT License for open-source distribution
+- Enhanced contributing guide with first-time contributor section
+- Repository metadata (description, keywords, homepage) in package.json
+- License badge in README
+- Open-source community guidelines and recognition section
 
 ## [0.2.0] - 2025-01-10
 

@@ -1,6 +1,19 @@
 {
   "name": "connect-star",
-  "private": true,
+  "version": "0.2.0",
+  "description": "A modern Connect Four game built with Turborepo, featuring cross-platform web and mobile applications with shared game logic",
+  "license": "MIT",
+  "author": "Connect-Star Contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/Connect-Star.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/Connect-Star/issues"
+  },
+  "homepage": "https://github.com/username/Connect-Star#readme",
+  "keywords": ["connect-four", "game", "react", "typescript", "monorepo", "turborepo", "next.js", "react-native", "expo"],
+  "private": false,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

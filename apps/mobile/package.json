@@ -8,7 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build": "expo build",
+    "build": "tsc --noEmit",
     "type-check": "tsc --noEmit",
     "lint": "eslint src/"
   },

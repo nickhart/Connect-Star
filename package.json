@@ -12,7 +12,17 @@
     "url": "https://github.com/username/Connect-Star/issues"
   },
   "homepage": "https://github.com/username/Connect-Star#readme",
-  "keywords": ["connect-four", "game", "react", "typescript", "monorepo", "turborepo", "next.js", "react-native", "expo"],
+  "keywords": [
+    "connect-four",
+    "game",
+    "react",
+    "typescript",
+    "monorepo",
+    "turborepo",
+    "next.js",
+    "react-native",
+    "expo"
+  ],
   "private": false,
   "scripts": {
     "build": "turbo build",

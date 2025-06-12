@@ -1,9 +1,11 @@
 # ADR-002: Comprehensive Testing Strategy
 
 ## Status
+
 Accepted
 
 ## Date
+
 2025-01-10
 
 ## Context
@@ -58,19 +60,20 @@ Testing Stack:
 
 ### Coverage Strategy
 
-| Package | Threshold | Rationale |
-|---------|-----------|-----------|
-| `game-logic` | 80% | Critical business logic |
-| `ui` | 80% | User-facing components |
-| `api-client` | 75% | External dependencies |
-| `mobile` | 70% | Platform-specific code |
-| `web` | 70% | Application integration |
+| Package      | Threshold | Rationale               |
+| ------------ | --------- | ----------------------- |
+| `game-logic` | 80%       | Critical business logic |
+| `ui`         | 80%       | User-facing components  |
+| `api-client` | 75%       | External dependencies   |
+| `mobile`     | 70%       | Platform-specific code  |
+| `web`        | 70%       | Application integration |
 
 ## Implementation Details
 
 ### Test Distribution
 
 **Total: 67 Tests**
+
 - `game-logic`: 25 unit tests (game rules, validation, win detection)
 - `ui`: 29 component tests (rendering, interactions, accessibility)
 - `api-client`: 13 integration tests (HTTP, WebSocket, error handling)
@@ -80,6 +83,7 @@ Testing Stack:
 ### Jest Configuration
 
 **Base Configuration (`jest.config.base.js`):**
+
 ```javascript
 module.exports = {
   preset: 'ts-jest',
@@ -99,6 +103,7 @@ module.exports = {
 ```
 
 **Package-Specific Overrides:**
+
 - **UI Package**: JSDOM environment, jest-dom matchers
 - **Mobile Package**: React Native preset, expo mocking
 - **API Client**: Node environment, fetch/WebSocket mocking
@@ -114,7 +119,7 @@ describe('makeMove', () => {
   it('should place piece in correct position', () => {
     const board = createEmptyBoard();
     const result = makeMove(board, 0, 'red');
-    
+
     expect(result.board[5][0]).toBe('red');
     expect(result.isValid).toBe(true);
   });
@@ -122,6 +127,7 @@ describe('makeMove', () => {
 ```
 
 **Coverage Areas:**
+
 - Board state management
 - Move validation (bounds, availability)
 - Win detection (horizontal, vertical, diagonal)
@@ -137,15 +143,16 @@ describe('GameBoard', () => {
   it('should handle column clicks', () => {
     const mockOnClick = jest.fn();
     render(<GameBoard board={board} onColumnClick={mockOnClick} />);
-    
+
     fireEvent.click(screen.getByLabelText('Drop piece in column 1'));
-    
+
     expect(mockOnClick).toHaveBeenCalledWith(0);
   });
 });
 ```
 
 **Coverage Areas:**
+
 - Component rendering with various props
 - User interaction handling
 - Accessibility compliance
@@ -161,13 +168,14 @@ describe('ConnectStarApiClient', () => {
   it('should handle WebSocket connections', () => {
     const client = new ConnectStarApiClient('ws://localhost');
     client.connect();
-    
+
     expect(mockWebSocket).toHaveBeenCalled();
   });
 });
 ```
 
 **Coverage Areas:**
+
 - HTTP request/response handling
 - WebSocket connection management
 - Error handling and retry logic
@@ -187,6 +195,7 @@ describe('App smoke test', () => {
 ```
 
 **Purpose:**
+
 - Verify app can be instantiated
 - Catch major configuration issues
 - Ensure critical dependencies load
@@ -194,6 +203,7 @@ describe('App smoke test', () => {
 ### Parallel Execution Strategy
 
 **Turborepo Integration:**
+
 ```json
 {
   "tasks": {
@@ -211,6 +221,7 @@ describe('App smoke test', () => {
 ```
 
 **Benefits:**
+
 - Tests run in parallel across packages
 - Only affected packages re-run tests
 - Cached results for unchanged packages
@@ -219,6 +230,7 @@ describe('App smoke test', () => {
 ### Mocking Strategy
 
 **Global Mocks:**
+
 ```typescript
 // API calls
 global.fetch = jest.fn();
@@ -233,6 +245,7 @@ jest.mock('expo-status-bar', () => ({
 ```
 
 **Selective Mocking:**
+
 - Mock external dependencies, not internal code
 - Use real implementations when feasible
 - Prefer dependency injection for testability

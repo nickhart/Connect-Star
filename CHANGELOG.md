@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - MIT License for open-source distribution
 - Enhanced contributing guide with first-time contributor section
 - Repository metadata (description, keywords, homepage) in package.json
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2025-01-10
 
 ### Added
+
 - Comprehensive testing infrastructure with Jest and React Testing Library
 - 67 tests across all packages (game-logic: 25, ui: 29, api-client: 13, apps: 2)
 - Coverage reporting with package-specific thresholds
@@ -25,11 +27,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Jest setup files with proper mocking for React Native and DOM environments
 
 ### Changed
+
 - Updated TypeScript configurations to exclude test files from builds
 - Enhanced Turborepo configuration for test task orchestration
 - Improved package.json scripts for testing workflows
 
 ### Technical Details
+
 - **game-logic**: Unit tests for board state, move validation, win detection
 - **ui**: Component tests for Button, GameBoard, PlayerIndicator with accessibility testing
 - **api-client**: Integration tests for HTTP client, WebSocket connections, event handling
@@ -38,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-01-09
 
 ### Added
+
 - Initial monorepo structure with Turborepo
 - Core packages: types, game-logic, ui, api-client
 - Next.js 14 web application with App Router and Tailwind CSS
@@ -50,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Development and build scripts
 
 ### Technical Infrastructure
+
 - **Turborepo**: Task orchestration and caching
 - **TypeScript**: End-to-end type safety
 - **pnpm**: Workspace package management
@@ -58,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Tailwind CSS**: Utility-first styling
 
 ### Project Structure
+
 ```
 Connect-Star/
 ├── apps/
@@ -71,6 +78,7 @@ Connect-Star/
 ```
 
 ### Game Features
+
 - Complete Connect Four game logic
 - Board state management
 - Move validation and execution

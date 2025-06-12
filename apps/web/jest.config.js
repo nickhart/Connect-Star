@@ -4,10 +4,7 @@ module.exports = {
   ...baseConfig,
   displayName: 'web',
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: [
-    '<rootDir>/jest.setup.js',
-    '@testing-library/jest-dom',
-  ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', '@testing-library/jest-dom'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',

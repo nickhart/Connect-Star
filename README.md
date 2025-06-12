@@ -21,7 +21,7 @@
 
 ### Prerequisites
 
-- **Node.js** 18+ 
+- **Node.js** 18+
 - **pnpm** 10+ (package manager)
 - **Expo CLI** (for mobile development)
 
@@ -41,8 +41,8 @@ pnpm install
 pnpm dev
 
 # Start specific applications
-pnpm dev --filter=web      # Web app only
-pnpm dev --filter=mobile   # Mobile app only
+pnpm dev --filter=@connect-star/web      # Web app only
+pnpm dev --filter=@connect-star/mobile   # Mobile app only
 ```
 
 ### Testing
@@ -117,7 +117,7 @@ Shared TypeScript definitions:
 - Player types and moves
 - API request/response types
 
-#### `@connect-star/ui` 
+#### `@connect-star/ui`
 Reusable React components:
 - `GameBoard` - Interactive game grid
 - `PlayerIndicator` - Current player display
@@ -186,7 +186,7 @@ React Native with Expo:
 We welcome contributions from the community! This project is open source and we encourage:
 
 - 🐛 **Bug reports** - Help us identify and fix issues
-- ✨ **Feature requests** - Suggest new functionality  
+- ✨ **Feature requests** - Suggest new functionality
 - 📖 **Documentation** - Improve guides and examples
 - 🧪 **Testing** - Add test coverage and find edge cases
 - 💻 **Code contributions** - Implement features and fixes

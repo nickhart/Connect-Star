@@ -8,7 +8,7 @@ module.exports = [
   js.configs.recommended,
   prettierConfig,
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js'],
+    ignores: ['dist/**', 'node_modules/**', '*.config.js', '**/__tests__/**', '**/*.test.*'],
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -25,6 +25,8 @@ module.exports = [
         console: 'readonly',
         React: 'readonly',
         HTMLButtonElement: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
       },
     },
     plugins: {

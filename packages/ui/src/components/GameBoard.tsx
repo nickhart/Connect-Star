@@ -37,7 +37,7 @@ export function GameBoard({
       for (let row = 0; row < ROWS; row++) {
         const prevCell = prevBoard[row][col];
         const currentCell = board[row][col];
-        
+
         if (!prevCell && currentCell) {
           // New piece found
           const id = `${Date.now()}-${col}-${row}`;
@@ -55,7 +55,7 @@ export function GameBoard({
       setIsAnimating(true);
       setDroppingPieces(newPieces);
       animationIdRef.current = newPieces[0].id;
-      
+
       // Animation completes after gravity + bounce duration
       setTimeout(() => {
         setIsAnimating(false);
@@ -85,27 +85,32 @@ export function GameBoard({
             aria-label={`Drop piece in column ${col + 1}`}
           >
             {Array.from({ length: ROWS }).map((_, row) => {
-              const droppingPiece = droppingPieces.find(p => p.col === col && p.row === row);
-              const shouldHideStaticPiece = droppingPiece && animationIdRef.current === droppingPiece.id;
-              
+              const droppingPiece = droppingPieces.find(
+                p => p.col === col && p.row === row
+              );
+              const shouldHideStaticPiece =
+                droppingPiece && animationIdRef.current === droppingPiece.id;
+
               return (
                 <div
                   key={`${row}-${col}`}
                   className={`cell ${
-                    shouldHideStaticPiece 
-                      ? 'cell-empty' 
-                      : board[row][col] 
-                        ? `cell-${board[row][col]}` 
+                    shouldHideStaticPiece
+                      ? 'cell-empty'
+                      : board[row][col]
+                        ? `cell-${board[row][col]}`
                         : 'cell-empty'
                   }`}
                 >
                   {droppingPiece && (
                     <div
                       className={`dropping-piece cell-${droppingPiece.player}`}
-                      style={{
-                        '--target-row': row,
-                        '--column': col,
-                      } as React.CSSProperties}
+                      style={
+                        {
+                          '--target-row': row,
+                          '--column': col,
+                        } as React.CSSProperties
+                      }
                     />
                   )}
                 </div>
@@ -114,7 +119,6 @@ export function GameBoard({
           </button>
         ))}
       </div>
-      
     </div>
   );
 }

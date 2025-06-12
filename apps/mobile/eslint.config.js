@@ -8,7 +8,7 @@ module.exports = [
   js.configs.recommended,
   prettierConfig,
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js'],
+    ignores: ['dist/**', 'node_modules/**', '*.config.js', '**/__tests__/**', '**/*.test.*'],
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -23,7 +23,14 @@ module.exports = [
       },
       globals: {
         console: 'readonly',
-        process: 'readonly',
+        React: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        global: 'readonly',
+        jest: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
       },
     },
     plugins: {
@@ -41,7 +48,9 @@ module.exports = [
       globals: {
         module: 'readonly',
         require: 'readonly',
-        process: 'readonly',
+        exports: 'readonly',
+        global: 'readonly',
+        jest: 'readonly',
       },
     },
     plugins: {

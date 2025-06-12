@@ -39,7 +39,10 @@
     "quality": "pnpm lint && pnpm type-check && pnpm test",
     "quality:fix": "pnpm format && pnpm lint && pnpm type-check",
     "pre-commit": "pnpx lint-staged",
-    "pre-push": "pnpm test:ci && pnpm build && pnpm type-check"
+    "pre-push": "pnpm test:ci && pnpm build && pnpm type-check",
+    "ci:watch": "./scripts/watch-ci.sh",
+    "ci:status": "gh run list --limit 5",
+    "ci:latest": "gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",

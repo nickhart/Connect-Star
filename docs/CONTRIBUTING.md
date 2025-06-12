@@ -464,7 +464,7 @@ cd packages/package-name && pnpm type-check
 expo start --clear
 
 # Reset Metro bundler
-npx react-native start --reset-cache
+pnpx react-native start --reset-cache
 ```
 
 ### Getting Help

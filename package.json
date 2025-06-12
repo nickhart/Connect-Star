@@ -56,22 +56,28 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
+      "prettier --write"
+    ],
+    "packages/**/*.{ts,tsx,js,jsx}": [
       "prettier --write",
-      "eslint --fix --max-warnings 0"
+      "bash -c 'cd packages/$(echo \"$0\" | cut -d/ -f2) && pnpm lint --fix'"
+    ],
+    "apps/**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "bash -c 'cd apps/$(echo \"$0\" | cut -d/ -f2) && pnpm lint --fix'"
     ],
     "**/*.{json,md,css}": [
       "prettier --write"
-    ],
-    "**/packages/**/*.{ts,tsx}": [
-      "bash -c 'cd packages/$(echo \"$0\" | cut -d/ -f2) && pnpm type-check'"
-    ],
-    "**/apps/**/*.{ts,tsx}": [
-      "bash -c 'cd apps/$(echo \"$0\" | cut -d/ -f2) && pnpm type-check'"
     ]
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "pnpm@10.12.1"
+  "packageManager": "pnpm@10.12.1",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

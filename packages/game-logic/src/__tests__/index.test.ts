@@ -87,7 +87,7 @@ describe('Game Logic', () => {
 
     test('should stack pieces correctly', () => {
       let gameState = createInitialGameState();
-      
+
       // First move: red in column 3
       gameState = makeMove(gameState, 3);
       expect(gameState.board[ROWS - 1][3]).toBe('red');
@@ -107,7 +107,7 @@ describe('Game Logic', () => {
 
     test('should throw error when column is full', () => {
       let gameState = createInitialGameState();
-      
+
       // Fill column 0
       for (let i = 0; i < ROWS; i++) {
         gameState = makeMove(gameState, 0);
@@ -124,7 +124,7 @@ describe('Game Logic', () => {
       const gameState = createInitialGameState();
       gameState.moveCount = ROWS * COLS - 1;
       gameState.currentPlayer = 'red';
-      
+
       // Fill all but one position
       for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
@@ -143,7 +143,7 @@ describe('Game Logic', () => {
     test('should detect horizontal win', () => {
       const board = createEmptyBoard();
       const row = ROWS - 1;
-      
+
       // Place 4 red pieces horizontally
       for (let col = 1; col <= 4; col++) {
         board[row][col] = 'red';
@@ -157,7 +157,7 @@ describe('Game Logic', () => {
     test('should detect vertical win', () => {
       const board = createEmptyBoard();
       const col = 3;
-      
+
       // Place 4 yellow pieces vertically
       for (let row = ROWS - 4; row < ROWS; row++) {
         board[row][col] = 'yellow';
@@ -169,7 +169,7 @@ describe('Game Logic', () => {
 
     test('should detect diagonal win (bottom-left to top-right)', () => {
       const board = createEmptyBoard();
-      
+
       // Place 4 red pieces diagonally
       board[ROWS - 1][0] = 'red';
       board[ROWS - 2][1] = 'red';
@@ -182,7 +182,7 @@ describe('Game Logic', () => {
 
     test('should detect diagonal win (top-left to bottom-right)', () => {
       const board = createEmptyBoard();
-      
+
       // Place 4 yellow pieces diagonally
       board[0][0] = 'yellow';
       board[1][1] = 'yellow';
@@ -220,7 +220,7 @@ describe('Game Logic', () => {
 
     test('should exclude full columns', () => {
       const board = createEmptyBoard();
-      
+
       // Fill first and last columns
       for (let row = 0; row < ROWS; row++) {
         board[row][0] = 'red';
@@ -233,7 +233,7 @@ describe('Game Logic', () => {
 
     test('should return empty array when board is full', () => {
       const board = createEmptyBoard();
-      
+
       // Fill entire board
       for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
@@ -257,7 +257,7 @@ describe('Game Logic', () => {
       const gameState = createInitialGameState();
       gameState.status = 'playing';
       expect(isGameFinished(gameState)).toBe(false);
-      
+
       gameState.status = 'waiting';
       expect(isGameFinished(gameState)).toBe(false);
     });
@@ -266,10 +266,10 @@ describe('Game Logic', () => {
   describe('Integration tests', () => {
     test('should play a complete game with red winning horizontally', () => {
       let gameState = createInitialGameState();
-      
+
       // Red moves: 0, 1, 2, 3 (horizontal win)
       // Yellow moves: 0, 1, 2 (blocking moves above red)
-      
+
       gameState = makeMove(gameState, 0); // Red
       gameState = makeMove(gameState, 0); // Yellow
       gameState = makeMove(gameState, 1); // Red
@@ -285,7 +285,7 @@ describe('Game Logic', () => {
 
     test('should play a complete game with yellow winning vertically', () => {
       let gameState = createInitialGameState();
-      
+
       // Yellow wins in column 3 vertically
       gameState = makeMove(gameState, 0); // Red
       gameState = makeMove(gameState, 3); // Yellow

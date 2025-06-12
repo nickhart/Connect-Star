@@ -1,0 +1,45 @@
+#!/bin/sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check if local branch is ahead of remote
+CURRENT_BRANCH=$(git branch --show-current)
+REMOTE_EXISTS=$(git ls-remote --heads origin "$CURRENT_BRANCH" 2>/dev/null)
+
+if [ -n "$REMOTE_EXISTS" ]; then
+  # Remote branch exists, check if we're ahead
+  COMMITS_AHEAD=$(git rev-list --count "origin/$CURRENT_BRANCH..HEAD" 2>/dev/null || echo "0")
+  if [ "$COMMITS_AHEAD" = "0" ]; then
+    echo "🔍 No new commits to push to origin/$CURRENT_BRANCH - skipping pre-push checks"
+    exit 0
+  fi
+  echo "🚀 Running pre-push checks for $COMMITS_AHEAD commit(s) ahead of origin/$CURRENT_BRANCH..."
+else
+  # New branch, always run checks
+  echo "🚀 Running pre-push checks for new branch '$CURRENT_BRANCH'..."
+fi
+
+# Run full test suite
+echo "🧪 Running tests..."
+pnpm test:ci
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed! Push cancelled."
+  exit 1
+fi
+
+# Build all packages
+echo "🔨 Building all packages..."
+pnpm build
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed! Push cancelled."
+  exit 1
+fi
+
+# Type check all packages
+echo "🔍 Type checking..."
+pnpm type-check
+if [ $? -ne 0 ]; then
+  echo "❌ Type check failed! Push cancelled."
+  exit 1
+fi
+
+echo "✅ All pre-push checks passed!"

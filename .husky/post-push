@@ -1,0 +1,52 @@
+#!/usr/bin/env sh
+
+# =============================================================================
+# Post-push Git Hook - Auto-monitor CI
+# =============================================================================
+# This hook automatically starts monitoring CI after pushing to a branch
+# with an open pull request
+# =============================================================================
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+print_info() {
+    echo -e "${BLUE}[CI-MONITOR]${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}[CI-MONITOR]${NC} $1"
+}
+
+# Check if we're pushing to a branch (not main)
+CURRENT_BRANCH=$(git branch --show-current)
+
+if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
+    exit 0
+fi
+
+# Check if gh CLI is available
+if ! command -v gh &> /dev/null; then
+    print_warning "GitHub CLI not available - skipping CI monitoring"
+    exit 0
+fi
+
+# Check if there's an open PR for this branch
+PR_NUMBER=$(gh pr view --json number --jq '.number' 2>/dev/null || echo "")
+
+if [ -n "$PR_NUMBER" ]; then
+    print_info "Found open PR #$PR_NUMBER for branch $CURRENT_BRANCH"
+    print_info "Starting CI monitor in 3 seconds... (Ctrl+C to cancel)"
+    
+    # Give user a chance to cancel
+    sleep 3
+    
+    # Run the CI monitoring script in background
+    ./scripts/watch-ci.sh "$CURRENT_BRANCH" &
+else
+    print_info "No open PR found for branch $CURRENT_BRANCH - skipping CI monitoring"
+fi

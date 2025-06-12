@@ -21,7 +21,7 @@
 
 ### Prerequisites
 
-- **Node.js** 18+ 
+- **Node.js** 18+
 - **pnpm** 10+ (package manager)
 - **Expo CLI** (for mobile development)
 
@@ -41,8 +41,8 @@ pnpm install
 pnpm dev
 
 # Start specific applications
-pnpm dev --filter=web      # Web app only
-pnpm dev --filter=mobile   # Mobile app only
+pnpm dev --filter=@connect-star/web      # Web app only
+pnpm dev --filter=@connect-star/mobile   # Mobile app only
 ```
 
 ### Testing
@@ -90,13 +90,13 @@ Connect-Star/
 
 This project maintains high test coverage across all packages:
 
-| Package | Tests | Coverage | Focus |
-|---------|-------|----------|-------|
-| `game-logic` | 25 tests | 80%+ | Game rules, win detection, board state |
-| `ui` | 29 tests | 80%+ | Component rendering, user interactions |
-| `api-client` | 13 tests | 75%+ | HTTP requests, WebSocket connections |
-| `mobile` | 1 test | Basic | Smoke test |
-| `web` | 1 test | Basic | Smoke test |
+| Package      | Tests    | Coverage | Focus                                  |
+| ------------ | -------- | -------- | -------------------------------------- |
+| `game-logic` | 25 tests | 80%+     | Game rules, win detection, board state |
+| `ui`         | 29 tests | 80%+     | Component rendering, user interactions |
+| `api-client` | 13 tests | 75%+     | HTTP requests, WebSocket connections   |
+| `mobile`     | 1 test   | Basic    | Smoke test                             |
+| `web`        | 1 test   | Basic    | Smoke test                             |
 
 **Total: 67 tests** - [View Testing Guide](docs/TESTING.md)
 
@@ -105,26 +105,34 @@ This project maintains high test coverage across all packages:
 ### Core Libraries
 
 #### `@connect-star/game-logic`
+
 Pure TypeScript implementation of Connect Four rules:
+
 - Board state management
 - Move validation and execution
 - Win condition detection (horizontal, vertical, diagonal)
 - Game state transitions
 
 #### `@connect-star/types`
+
 Shared TypeScript definitions:
+
 - Game state interfaces
 - Player types and moves
 - API request/response types
 
-#### `@connect-star/ui` 
+#### `@connect-star/ui`
+
 Reusable React components:
+
 - `GameBoard` - Interactive game grid
 - `PlayerIndicator` - Current player display
 - `Button` - Styled button variants
 
 #### `@connect-star/api-client`
+
 Server communication utilities:
+
 - HTTP client with TypeScript support
 - WebSocket manager for real-time gameplay
 - Event-driven architecture
@@ -132,14 +140,18 @@ Server communication utilities:
 ### Applications
 
 #### `@connect-star/web`
+
 Next.js 14 web application:
+
 - App Router with TypeScript
 - Tailwind CSS styling
 - Responsive design
 - Server-side rendering
 
 #### `@connect-star/mobile`
+
 React Native with Expo:
+
 - Cross-platform iOS/Android
 - Native mobile components
 - Touch-optimized gameplay
@@ -147,32 +159,84 @@ React Native with Expo:
 
 ## 🛠️ Development Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all development servers |
-| `pnpm build` | Build all packages and apps |
-| `pnpm test` | Run all tests across packages |
-| `pnpm test:coverage` | Generate coverage reports |
-| `pnpm lint` | Check code style and quality |
-| `pnpm type-check` | Validate TypeScript types |
-| `pnpm format` | Format code with Prettier |
-| `pnpm clean` | Remove build artifacts |
+### Core Commands
+
+| Command              | Description                   |
+| -------------------- | ----------------------------- |
+| `pnpm dev`           | Start all development servers |
+| `pnpm build`         | Build all packages and apps   |
+| `pnpm test`          | Run all tests across packages |
+| `pnpm test:coverage` | Generate coverage reports     |
+| `pnpm lint`          | Check code style and quality  |
+| `pnpm type-check`    | Validate TypeScript types     |
+| `pnpm format`        | Format code with Prettier     |
+| `pnpm clean`         | Remove build artifacts        |
+
+### CI/CD Monitoring
+
+| Command          | Description                             |
+| ---------------- | --------------------------------------- |
+| `pnpm ci:watch`  | Auto-monitor CI runs for current branch |
+| `pnpm ci:status` | Show recent GitHub Actions runs         |
+| `pnpm ci:latest` | View details of latest CI run           |
+
+### Quality Automation
+
+| Command            | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `pnpm quality`     | Run full quality check (lint + type-check + test) |
+| `pnpm quality:fix` | Auto-fix formatting and linting issues            |
 
 ## 🏗️ Architecture
 
 ### Monorepo Benefits
+
 - **Shared Code**: Game logic and components reused across platforms
 - **Type Safety**: End-to-end TypeScript with shared types
 - **Consistent Tooling**: Unified linting, formatting, and testing
 - **Parallel Development**: Independent app development with shared dependencies
 
 ### Technology Stack
+
 - **Build System**: Turborepo for task orchestration and caching
 - **Language**: TypeScript for type safety across the stack
 - **Frontend**: React with Next.js (web) and React Native (mobile)
 - **Styling**: Tailwind CSS for consistent design
 - **Testing**: Jest with React Testing Library
-- **Code Quality**: ESLint + Prettier with pre-commit hooks
+- **Code Quality**: ESLint + Prettier with automated pre-commit hooks
+- **CI/CD**: GitHub Actions with automated testing and PR labeling
+- **Development**: Auto-monitoring workflows and quality gates
+
+## 🤖 Automation & CI/CD
+
+### GitHub Actions Features
+
+- **Automated Testing**: Runs tests on all packages with proper dependency resolution
+- **Type Checking**: Validates TypeScript across the entire monorepo
+- **Auto PR Labeling**: Automatically labels PRs based on changed files:
+  - `app:web`, `app:mobile` - Application changes
+  - `pkg:ui`, `pkg:game-logic`, `pkg:api-client`, `pkg:types` - Package changes
+  - `ci/cd`, `docker`, `config`, `dependencies`, `docs`, `tests` - Infrastructure changes
+  - `frontend`, `backend`, `shared` - Logical groupings
+
+### Development Workflow Automation
+
+- **Pre-commit Hooks**: Automatically format code and run linting before commits
+- **Pre-push Validation**: Runs tests and type checking before pushing
+- **CI Monitoring**: Auto-watch GitHub Actions runs after pushing to PR branches
+- **Quality Gates**: Comprehensive checks ensure code quality standards
+
+### Real-time CI Monitoring
+
+```bash
+# Automatic monitoring after git push (via post-push hook)
+git push  # Automatically starts watching CI
+
+# Manual monitoring
+pnpm ci:watch    # Watch CI for current branch
+pnpm ci:status   # Show recent runs
+pnpm ci:latest   # View latest run details
+```
 
 ## 📚 Documentation
 
@@ -186,12 +250,13 @@ React Native with Expo:
 We welcome contributions from the community! This project is open source and we encourage:
 
 - 🐛 **Bug reports** - Help us identify and fix issues
-- ✨ **Feature requests** - Suggest new functionality  
+- ✨ **Feature requests** - Suggest new functionality
 - 📖 **Documentation** - Improve guides and examples
 - 🧪 **Testing** - Add test coverage and find edge cases
 - 💻 **Code contributions** - Implement features and fixes
 
 **Getting Started:**
+
 1. Read the [Contributing Guide](docs/CONTRIBUTING.md)
 2. Look for [`good-first-issue`](https://github.com/username/Connect-Star/labels/good-first-issue) labels
 3. Follow the established code style and testing practices

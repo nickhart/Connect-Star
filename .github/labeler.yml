@@ -106,19 +106,6 @@
       - 'packages/types/**'
 
 # -----------------------------------------------------------------------------
-# Change Size (approximate)
+# Note: Size labels would need a custom action to count files
+# The standard labeler doesn't support file count conditions
 # -----------------------------------------------------------------------------
-'size:small':
-  - changed-files:
-    - any-glob-to-any-file: '*'
-    - count: '1-10'
-
-'size:medium':
-  - changed-files:
-    - any-glob-to-any-file: '*'
-    - count: '11-30'
-
-'size:large':
-  - changed-files:
-    - any-glob-to-any-file: '*'
-    - count: '31+'

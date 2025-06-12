@@ -8,7 +8,13 @@ module.exports = [
   js.configs.recommended,
   prettierConfig,
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js', '**/__tests__/**', '**/*.test.*'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '*.config.js',
+      '**/__tests__/**',
+      '**/*.test.*',
+    ],
   },
   {
     files: ['**/*.{ts,tsx}'],

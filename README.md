@@ -90,13 +90,13 @@ Connect-Star/
 
 This project maintains high test coverage across all packages:
 
-| Package | Tests | Coverage | Focus |
-|---------|-------|----------|-------|
-| `game-logic` | 25 tests | 80%+ | Game rules, win detection, board state |
-| `ui` | 29 tests | 80%+ | Component rendering, user interactions |
-| `api-client` | 13 tests | 75%+ | HTTP requests, WebSocket connections |
-| `mobile` | 1 test | Basic | Smoke test |
-| `web` | 1 test | Basic | Smoke test |
+| Package      | Tests    | Coverage | Focus                                  |
+| ------------ | -------- | -------- | -------------------------------------- |
+| `game-logic` | 25 tests | 80%+     | Game rules, win detection, board state |
+| `ui`         | 29 tests | 80%+     | Component rendering, user interactions |
+| `api-client` | 13 tests | 75%+     | HTTP requests, WebSocket connections   |
+| `mobile`     | 1 test   | Basic    | Smoke test                             |
+| `web`        | 1 test   | Basic    | Smoke test                             |
 
 **Total: 67 tests** - [View Testing Guide](docs/TESTING.md)
 
@@ -105,26 +105,34 @@ This project maintains high test coverage across all packages:
 ### Core Libraries
 
 #### `@connect-star/game-logic`
+
 Pure TypeScript implementation of Connect Four rules:
+
 - Board state management
 - Move validation and execution
 - Win condition detection (horizontal, vertical, diagonal)
 - Game state transitions
 
 #### `@connect-star/types`
+
 Shared TypeScript definitions:
+
 - Game state interfaces
 - Player types and moves
 - API request/response types
 
 #### `@connect-star/ui`
+
 Reusable React components:
+
 - `GameBoard` - Interactive game grid
 - `PlayerIndicator` - Current player display
 - `Button` - Styled button variants
 
 #### `@connect-star/api-client`
+
 Server communication utilities:
+
 - HTTP client with TypeScript support
 - WebSocket manager for real-time gameplay
 - Event-driven architecture
@@ -132,14 +140,18 @@ Server communication utilities:
 ### Applications
 
 #### `@connect-star/web`
+
 Next.js 14 web application:
+
 - App Router with TypeScript
 - Tailwind CSS styling
 - Responsive design
 - Server-side rendering
 
 #### `@connect-star/mobile`
+
 React Native with Expo:
+
 - Cross-platform iOS/Android
 - Native mobile components
 - Touch-optimized gameplay
@@ -147,26 +159,28 @@ React Native with Expo:
 
 ## 🛠️ Development Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all development servers |
-| `pnpm build` | Build all packages and apps |
-| `pnpm test` | Run all tests across packages |
-| `pnpm test:coverage` | Generate coverage reports |
-| `pnpm lint` | Check code style and quality |
-| `pnpm type-check` | Validate TypeScript types |
-| `pnpm format` | Format code with Prettier |
-| `pnpm clean` | Remove build artifacts |
+| Command              | Description                   |
+| -------------------- | ----------------------------- |
+| `pnpm dev`           | Start all development servers |
+| `pnpm build`         | Build all packages and apps   |
+| `pnpm test`          | Run all tests across packages |
+| `pnpm test:coverage` | Generate coverage reports     |
+| `pnpm lint`          | Check code style and quality  |
+| `pnpm type-check`    | Validate TypeScript types     |
+| `pnpm format`        | Format code with Prettier     |
+| `pnpm clean`         | Remove build artifacts        |
 
 ## 🏗️ Architecture
 
 ### Monorepo Benefits
+
 - **Shared Code**: Game logic and components reused across platforms
 - **Type Safety**: End-to-end TypeScript with shared types
 - **Consistent Tooling**: Unified linting, formatting, and testing
 - **Parallel Development**: Independent app development with shared dependencies
 
 ### Technology Stack
+
 - **Build System**: Turborepo for task orchestration and caching
 - **Language**: TypeScript for type safety across the stack
 - **Frontend**: React with Next.js (web) and React Native (mobile)
@@ -192,6 +206,7 @@ We welcome contributions from the community! This project is open source and we 
 - 💻 **Code contributions** - Implement features and fixes
 
 **Getting Started:**
+
 1. Read the [Contributing Guide](docs/CONTRIBUTING.md)
 2. Look for [`good-first-issue`](https://github.com/username/Connect-Star/labels/good-first-issue) labels
 3. Follow the established code style and testing practices

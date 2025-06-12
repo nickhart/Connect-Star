@@ -159,6 +159,8 @@ React Native with Expo:
 
 ## 🛠️ Development Scripts
 
+### Core Commands
+
 | Command              | Description                   |
 | -------------------- | ----------------------------- |
 | `pnpm dev`           | Start all development servers |
@@ -169,6 +171,21 @@ React Native with Expo:
 | `pnpm type-check`    | Validate TypeScript types     |
 | `pnpm format`        | Format code with Prettier     |
 | `pnpm clean`         | Remove build artifacts        |
+
+### CI/CD Monitoring
+
+| Command          | Description                             |
+| ---------------- | --------------------------------------- |
+| `pnpm ci:watch`  | Auto-monitor CI runs for current branch |
+| `pnpm ci:status` | Show recent GitHub Actions runs         |
+| `pnpm ci:latest` | View details of latest CI run           |
+
+### Quality Automation
+
+| Command            | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `pnpm quality`     | Run full quality check (lint + type-check + test) |
+| `pnpm quality:fix` | Auto-fix formatting and linting issues            |
 
 ## 🏗️ Architecture
 
@@ -186,7 +203,40 @@ React Native with Expo:
 - **Frontend**: React with Next.js (web) and React Native (mobile)
 - **Styling**: Tailwind CSS for consistent design
 - **Testing**: Jest with React Testing Library
-- **Code Quality**: ESLint + Prettier with pre-commit hooks
+- **Code Quality**: ESLint + Prettier with automated pre-commit hooks
+- **CI/CD**: GitHub Actions with automated testing and PR labeling
+- **Development**: Auto-monitoring workflows and quality gates
+
+## 🤖 Automation & CI/CD
+
+### GitHub Actions Features
+
+- **Automated Testing**: Runs tests on all packages with proper dependency resolution
+- **Type Checking**: Validates TypeScript across the entire monorepo
+- **Auto PR Labeling**: Automatically labels PRs based on changed files:
+  - `app:web`, `app:mobile` - Application changes
+  - `pkg:ui`, `pkg:game-logic`, `pkg:api-client`, `pkg:types` - Package changes
+  - `ci/cd`, `docker`, `config`, `dependencies`, `docs`, `tests` - Infrastructure changes
+  - `frontend`, `backend`, `shared` - Logical groupings
+
+### Development Workflow Automation
+
+- **Pre-commit Hooks**: Automatically format code and run linting before commits
+- **Pre-push Validation**: Runs tests and type checking before pushing
+- **CI Monitoring**: Auto-watch GitHub Actions runs after pushing to PR branches
+- **Quality Gates**: Comprehensive checks ensure code quality standards
+
+### Real-time CI Monitoring
+
+```bash
+# Automatic monitoring after git push (via post-push hook)
+git push  # Automatically starts watching CI
+
+# Manual monitoring
+pnpm ci:watch    # Watch CI for current branch
+pnpm ci:status   # Show recent runs
+pnpm ci:latest   # View latest run details
+```
 
 ## 📚 Documentation
 

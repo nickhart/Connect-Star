@@ -55,7 +55,7 @@ pnpm lint
 NODE_ENV=production pnpm build
 
 # Analyze bundle size (web)
-cd apps/web && npx @next/bundle-analyzer
+cd apps/web && pnpx @next/bundle-analyzer
 
 # Check package sizes
 pnpm size-limit

@@ -1,9 +1,9 @@
 import { ConnectStarApiClient } from '../index';
-import type { 
-  CreateRoomRequest, 
-  JoinRoomRequest, 
-  MakeMoveRequest, 
-  GameEvent 
+import type {
+  CreateRoomRequest,
+  JoinRoomRequest,
+  MakeMoveRequest,
+  GameEvent,
 } from '@connect-star/types';
 
 // Mock fetch and WebSocket
@@ -18,8 +18,10 @@ const mockWebSocketInstance = {
 
 // @ts-ignore
 global.fetch = mockFetch;
-// @ts-ignore  
-global.WebSocket = mockWebSocket.mockImplementation(() => mockWebSocketInstance);
+// @ts-ignore
+global.WebSocket = mockWebSocket.mockImplementation(
+  () => mockWebSocketInstance
+);
 
 describe('ConnectStarApiClient', () => {
   let client: ConnectStarApiClient;
@@ -40,7 +42,9 @@ describe('ConnectStarApiClient', () => {
     });
 
     test('should handle base URL with trailing slash', () => {
-      const clientWithSlash = new ConnectStarApiClient('https://api.example.com/');
+      const clientWithSlash = new ConnectStarApiClient(
+        'https://api.example.com/'
+      );
       expect(clientWithSlash).toBeInstanceOf(ConnectStarApiClient);
     });
   });
@@ -56,7 +60,9 @@ describe('ConnectStarApiClient', () => {
         id: 'room-123',
         players: { red: 'Alice' },
         gameState: {
-          board: Array(6).fill(null).map(() => Array(7).fill(null)),
+          board: Array(6)
+            .fill(null)
+            .map(() => Array(7).fill(null)),
           currentPlayer: 'red' as const,
           status: 'waiting' as const,
           winner: null,
@@ -76,16 +82,13 @@ describe('ConnectStarApiClient', () => {
 
       const result = await client.createRoom(mockRequest);
 
-      expect(mockFetch).toHaveBeenCalledWith(
-        `${baseUrl}/api/rooms`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(mockRequest),
-        }
-      );
+      expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/api/rooms`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(mockRequest),
+      });
       expect(result).toEqual(mockResponse);
     });
 
@@ -115,7 +118,9 @@ describe('ConnectStarApiClient', () => {
           id: 'room-123',
           players: { red: 'Alice', yellow: 'Bob' },
           gameState: {
-            board: Array(6).fill(null).map(() => Array(7).fill(null)),
+            board: Array(6)
+              .fill(null)
+              .map(() => Array(7).fill(null)),
             currentPlayer: 'red' as const,
             status: 'playing' as const,
             winner: null,
@@ -161,7 +166,9 @@ describe('ConnectStarApiClient', () => {
           id: 'room-123',
           players: { red: 'Alice', yellow: 'Bob' },
           gameState: {
-            board: Array(6).fill(null).map(() => Array(7).fill(null)),
+            board: Array(6)
+              .fill(null)
+              .map(() => Array(7).fill(null)),
             currentPlayer: 'yellow' as const,
             status: 'playing' as const,
             winner: null,
@@ -230,7 +237,7 @@ describe('ConnectStarApiClient', () => {
   describe('Event listeners', () => {
     test('should add and remove event listeners', () => {
       const listener = jest.fn();
-      
+
       client.addEventListener('move', listener);
       client.removeEventListener('move', listener);
 
@@ -244,7 +251,7 @@ describe('ConnectStarApiClient', () => {
     test('should handle multiple listeners for same event', () => {
       const listener1 = jest.fn();
       const listener2 = jest.fn();
-      
+
       client.addEventListener('move', listener1);
       client.addEventListener('move', listener2);
 
@@ -263,7 +270,9 @@ describe('ConnectStarApiClient', () => {
           id: 'room-123',
           players: { red: 'Alice' },
           gameState: {
-            board: Array(6).fill(null).map(() => Array(7).fill(null)),
+            board: Array(6)
+              .fill(null)
+              .map(() => Array(7).fill(null)),
             currentPlayer: 'red' as const,
             status: 'waiting' as const,
             winner: null,

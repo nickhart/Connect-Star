@@ -8,7 +8,7 @@ module.exports = [
   js.configs.recommended,
   prettierConfig,
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js'],
+    ignores: ['dist/**', 'node_modules/**', '*.config.js', '**/__tests__/**', '**/*.test.*'],
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -17,11 +17,20 @@ module.exports = [
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
       globals: {
         console: 'readonly',
-        fetch: 'readonly',
+        React: 'readonly',
+        HTMLButtonElement: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
         WebSocket: 'readonly',
+        fetch: 'readonly',
+        global: 'readonly',
+        jest: 'readonly',
       },
     },
     plugins: {
@@ -40,6 +49,8 @@ module.exports = [
         module: 'readonly',
         require: 'readonly',
         exports: 'readonly',
+        global: 'readonly',
+        jest: 'readonly',
       },
     },
     plugins: {

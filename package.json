@@ -42,7 +42,13 @@
     "pre-push": "pnpm test:ci && pnpm build && pnpm type-check",
     "ci:watch": "./scripts/watch-ci.sh",
     "ci:status": "gh run list --limit 5",
-    "ci:latest": "gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')"
+    "ci:latest": "gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')",
+    "web": "pnpm dev --filter=@connect-star/web",
+    "mobile": "pnpm dev --filter=@connect-star/mobile",
+    "web:build": "pnpm build --filter=@connect-star/web",
+    "mobile:build": "pnpm build --filter=@connect-star/mobile",
+    "web:test": "pnpm test --filter=@connect-star/web",
+    "mobile:test": "pnpm test --filter=@connect-star/mobile"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",

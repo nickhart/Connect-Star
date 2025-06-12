@@ -38,7 +38,7 @@
     "prepare": "husky",
     "quality": "pnpm lint && pnpm type-check && pnpm test",
     "quality:fix": "pnpm format && pnpm lint && pnpm type-check",
-    "pre-commit": "npx lint-staged",
+    "pre-commit": "pnpx lint-staged",
     "pre-push": "pnpm test:ci && pnpm build && pnpm type-check"
   },
   "devDependencies": {

@@ -76,19 +76,32 @@ pnpm ci:latest             # View latest run details
 
 ### Monorepo Structure
 
-This is a Turborepo monorepo with cross-platform Connect Four game:
+This is a Turborepo monorepo with multi-mode Connect Four game supporting local and online multiplayer:
 
 ```
 Connect-Star/
 ├── apps/
-│   ├── web/              # Next.js 14 web app
+│   ├── web/              # Next.js 14 web app (port 3001)
 │   └── mobile/           # React Native + Expo mobile app
 ├── packages/
 │   ├── game-logic/       # Connect Four game engine (25 tests)
 │   ├── ui/               # Shared React components (29 tests)
 │   ├── api-client/       # HTTP/WebSocket client (13 tests)
-│   └── types/            # Shared TypeScript definitions
+│   ├── types/            # Shared TypeScript definitions
+│   └── store/            # Shared state management (Zustand) - planned
 ```
+
+### Game Modes
+
+- **Local Play**: Two players alternating on same device (current implementation)
+- **Online Multiplayer**: Real-time play via WebSocket against remote opponents
+- **Single Player vs AI**: Future ML-powered computer opponent (planned)
+
+### External Dependencies
+
+- **Rails Game Server**: http://localhost:3000 (simple-game-server API)
+- **Database**: User accounts, game rooms, and match history
+- **WebSocket**: Real-time game updates and player events
 
 ### Key Architectural Patterns
 
@@ -151,6 +164,43 @@ Connect-Star/
 - `apps/web/src/app/page.tsx` - Next.js main game page
 - `apps/mobile/src/screens/GameScreen.tsx` - React Native game screen
 
+## Multiplayer Implementation Plan
+
+### Phase 1: Game Mode Foundation
+
+- Add game mode selection to main menu (`local` | `multiplayer` | `ai`)
+- Enhance GameBoard component to accept mode parameter
+- Keep existing local play completely unchanged for testing
+- Add optional authentication layer
+
+### Phase 2: Authentication & User Management
+
+- Extend API client for auth methods (login, register, logout, profile)
+- Create shared auth store with Zustand
+- Build login/register components
+- Add user profile and statistics
+
+### Phase 3: Online Multiplayer
+
+- Implement game lobby with active game listing (newest first)
+- Add create/join game functionality
+- Real-time gameplay via WebSocket with polling fallback
+- Connection management and error handling
+
+### Phase 4: Enhanced Features
+
+- User statistics and game history
+- About screen and navigation improvements
+- Connection status indicators
+- Prepare architecture for future AI integration
+
+### Development Strategy
+
+- **Preserve local play**: Current single-player mode unchanged
+- **Progressive enhancement**: Multiplayer as additional mode
+- **Shared components**: Reuse UI between game modes
+- **Future-ready**: Architecture supports AI opponent addition
+
 ### Notes for Development
 
 - Always run tests before committing: `pnpm test`
@@ -158,3 +208,4 @@ Connect-Star/
 - The monorepo uses workspace dependencies - changes to packages automatically affect apps
 - All packages must maintain 75%+ test coverage
 - Follow conventional commits for consistent commit messages
+- Rails game server must be running on localhost:3000 for multiplayer features

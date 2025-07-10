@@ -1,5 +1,4 @@
 #!/bin/sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 # Check if local branch is ahead of remote
 CURRENT_BRANCH=$(git branch --show-current)

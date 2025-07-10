@@ -88,5 +88,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@simple-game-server/client": "link:/Users/nickhart/Developer/simple-game-server/clients/typescript"
   }
 }

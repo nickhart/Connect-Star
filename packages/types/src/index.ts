@@ -6,6 +6,8 @@ export type Board = CellState[][];
 
 export type GameStatus = 'waiting' | 'playing' | 'finished';
 
+export type GameMode = 'local' | 'multiplayer' | 'ai';
+
 export interface GameState {
   board: Board;
   currentPlayer: Player;
@@ -18,6 +20,23 @@ export interface GameState {
 export interface GameMove {
   col: number;
   player: Player;
+}
+
+export interface GameConfig {
+  mode: GameMode;
+  roomId?: string; // for multiplayer
+  aiDifficulty?: 'easy' | 'medium' | 'hard'; // for future AI
+  playerNames: {
+    red: string;
+    yellow: string;
+  };
+}
+
+export interface EnhancedGameState extends GameState {
+  mode: GameMode;
+  config: GameConfig;
+  isMyTurn?: boolean; // for multiplayer
+  playerId?: string; // for multiplayer
 }
 
 export interface GameRoom {

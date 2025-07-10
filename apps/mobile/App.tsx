@@ -38,15 +38,15 @@ function App() {
           onAbout={handleAbout}
         />
       )}
-      
+
       {currentScreen === 'local-game' && (
         <LocalGameScreen onBackToMenu={handleBackToMenu} />
       )}
-      
+
       {currentScreen === 'about' && (
         <AboutScreen onBackToMenu={handleBackToMenu} />
       )}
-      
+
       <StatusBar style="light" />
     </View>
   );

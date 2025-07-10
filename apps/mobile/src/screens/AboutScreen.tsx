@@ -23,7 +23,8 @@ export function AboutScreen({ onBackToMenu }: AboutScreenProps) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Connect Star 🔴🟡</Text>
           <Text style={styles.sectionText}>
-            A modern multi-mode Connect Four game built with TypeScript, React Native, and love.
+            A modern multi-mode Connect Four game built with TypeScript, React
+            Native, and love.
           </Text>
         </View>
 
@@ -32,38 +33,55 @@ export function AboutScreen({ onBackToMenu }: AboutScreenProps) {
           <View style={styles.listItem}>
             <Text style={styles.listIcon}>✓</Text>
             <Text style={styles.listText}>
-              <Text style={styles.bold}>Local Play:</Text> Two players alternating on the same device
+              <Text style={styles.bold}>Local Play:</Text> Two players
+              alternating on the same device
             </Text>
           </View>
           <View style={styles.listItem}>
             <Text style={styles.listIcon}>🚧</Text>
             <Text style={styles.listText}>
-              <Text style={styles.bold}>Online Multiplayer:</Text> Real-time play against remote opponents (Coming Soon)
+              <Text style={styles.bold}>Online Multiplayer:</Text> Real-time
+              play against remote opponents (Coming Soon)
             </Text>
           </View>
           <View style={styles.listItem}>
             <Text style={styles.listIcon}>🔮</Text>
             <Text style={styles.listText}>
-              <Text style={styles.bold}>AI Opponent:</Text> ML-powered computer opponent (Planned)
+              <Text style={styles.bold}>AI Opponent:</Text> ML-powered computer
+              opponent (Planned)
             </Text>
           </View>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionSubtitle}>How to Play</Text>
-          <Text style={styles.listText}>1. Players take turns dropping colored pieces into columns</Text>
-          <Text style={styles.listText}>2. The first player to connect four pieces wins!</Text>
-          <Text style={styles.listText}>3. Connections can be horizontal, vertical, or diagonal</Text>
-          <Text style={styles.listText}>4. If the board fills up without a winner, it&apos;s a draw</Text>
+          <Text style={styles.listText}>
+            1. Players take turns dropping colored pieces into columns
+          </Text>
+          <Text style={styles.listText}>
+            2. The first player to connect four pieces wins!
+          </Text>
+          <Text style={styles.listText}>
+            3. Connections can be horizontal, vertical, or diagonal
+          </Text>
+          <Text style={styles.listText}>
+            4. If the board fills up without a winner, it&apos;s a draw
+          </Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionSubtitle}>Features</Text>
-          <Text style={styles.listText}>• Smooth piece-dropping animations</Text>
+          <Text style={styles.listText}>
+            • Smooth piece-dropping animations
+          </Text>
           <Text style={styles.listText}>• Cross-platform: Web and Mobile</Text>
-          <Text style={styles.listText}>• Built with modern TypeScript and React</Text>
+          <Text style={styles.listText}>
+            • Built with modern TypeScript and React
+          </Text>
           <Text style={styles.listText}>• Comprehensive test coverage</Text>
-          <Text style={styles.listText}>• Touch-optimized for mobile devices</Text>
+          <Text style={styles.listText}>
+            • Touch-optimized for mobile devices
+          </Text>
         </View>
 
         <View style={[styles.section, styles.footer]}>

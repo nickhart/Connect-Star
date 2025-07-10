@@ -8,7 +8,10 @@ interface MainMenuMobileProps {
   onAbout: () => void;
 }
 
-export function MainMenuMobile({ onGameModeSelect, onAbout }: MainMenuMobileProps) {
+export function MainMenuMobile({
+  onGameModeSelect,
+  onAbout,
+}: MainMenuMobileProps) {
   const handleMultiplayerSelect = () => {
     Alert.alert(
       'Coming Soon!',
@@ -52,11 +55,7 @@ export function MainMenuMobile({ onGameModeSelect, onAbout }: MainMenuMobileProp
           disabled
         />
 
-        <Button
-          title="About"
-          onPress={onAbout}
-          variant="secondary"
-        />
+        <Button title="About" onPress={onAbout} variant="secondary" />
       </View>
 
       <View style={styles.footer}>

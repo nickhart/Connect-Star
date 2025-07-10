@@ -13,10 +13,7 @@ describe('MainMenu', () => {
 
   it('renders the title and subtitle', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     expect(screen.getByText('Connect Star')).toBeInTheDocument();
@@ -25,10 +22,7 @@ describe('MainMenu', () => {
 
   it('renders all game mode buttons', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     expect(screen.getByText('Play Locally')).toBeInTheDocument();
@@ -39,10 +33,7 @@ describe('MainMenu', () => {
 
   it('calls onGameModeSelect with "local" when Play Locally is clicked', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     fireEvent.click(screen.getByText('Play Locally'));
@@ -51,10 +42,7 @@ describe('MainMenu', () => {
 
   it('calls onGameModeSelect with "multiplayer" when Play Online is clicked', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     fireEvent.click(screen.getByText('Play Online'));
@@ -63,10 +51,7 @@ describe('MainMenu', () => {
 
   it('calls onAbout when About button is clicked', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     fireEvent.click(screen.getByText('About'));
@@ -75,10 +60,7 @@ describe('MainMenu', () => {
 
   it('disables the AI mode button', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     const aiButton = screen.getByText('Play vs Computer');
@@ -87,10 +69,7 @@ describe('MainMenu', () => {
 
   it('shows "Coming Soon" text for AI mode', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     expect(screen.getByText('(Coming Soon)')).toBeInTheDocument();
@@ -110,10 +89,7 @@ describe('MainMenu', () => {
 
   it('shows the description text', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     expect(
@@ -123,10 +99,7 @@ describe('MainMenu', () => {
 
   it('does not call onGameModeSelect when AI button is clicked (disabled)', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     fireEvent.click(screen.getByText('Play vs Computer'));
@@ -135,10 +108,7 @@ describe('MainMenu', () => {
 
   it('has proper accessibility attributes', () => {
     render(
-      <MainMenu
-        onGameModeSelect={mockOnGameModeSelect}
-        onAbout={mockOnAbout}
-      />
+      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
     );
 
     const buttons = screen.getAllByRole('button');

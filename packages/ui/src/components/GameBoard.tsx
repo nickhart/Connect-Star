@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type { Board, GameMode, GameConfig } from '@connect-star/types';
+import type { Board, GameMode } from '@connect-star/types';
 import { ROWS, COLS } from '@connect-star/game-logic';
 import './GameBoard.css';
 
@@ -9,7 +9,6 @@ interface GameBoardProps {
   disabled?: boolean;
   className?: string;
   mode?: GameMode; // Optional for backward compatibility
-  config?: GameConfig; // Optional for backward compatibility
   isMyTurn?: boolean; // For multiplayer mode
 }
 
@@ -26,7 +25,6 @@ export function GameBoard({
   disabled = false,
   className = '',
   mode = 'local',
-  config,
   isMyTurn = true,
 }: GameBoardProps) {
   const [droppingPieces, setDroppingPieces] = useState<DroppingPiece[]>([]);

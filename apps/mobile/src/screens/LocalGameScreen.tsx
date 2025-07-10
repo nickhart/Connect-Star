@@ -37,11 +37,7 @@ export function LocalGameScreen({ onBackToMenu }: LocalGameScreenProps) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Button
-          title="← Menu"
-          onPress={onBackToMenu}
-          variant="secondary"
-        />
+        <Button title="← Menu" onPress={onBackToMenu} variant="secondary" />
         <Text style={styles.title}>Local Play</Text>
         <View style={styles.spacer} />
       </View>

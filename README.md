@@ -1,6 +1,6 @@
 # Connect Star 🔴🟡
 
-> A modern Connect Four game built with Turborepo, featuring cross-platform web and mobile applications with shared game logic.
+> A modern multi-mode Connect Four game built with Turborepo, featuring local play, online multiplayer, and future AI opponents across web and mobile platforms.
 
 ## 📊 Project Status
 
@@ -24,6 +24,7 @@
 - **Node.js** 18+
 - **pnpm** 10+ (package manager)
 - **Expo CLI** (for mobile development)
+- **Rails Game Server** (for multiplayer features) - [simple-game-server](https://github.com/username/simple-game-server)
 
 ### Installation
 
@@ -36,14 +37,33 @@ pnpm install
 
 ### Development
 
+#### Local Play Mode (No Server Required)
+
 ```bash
 # Start all applications
 pnpm dev
 
 # Start specific applications
-pnpm dev --filter=@connect-star/web      # Web app only
+pnpm dev --filter=@connect-star/web      # Web app (localhost:3001)
 pnpm dev --filter=@connect-star/mobile   # Mobile app only
 ```
+
+#### Multiplayer Mode (Requires Game Server)
+
+```bash
+# 1. Start Rails game server (in separate terminal)
+cd path/to/simple-game-server
+rails server                             # Runs on localhost:3000
+
+# 2. Start Connect Star apps
+pnpm dev
+```
+
+#### Development URLs
+
+- **Web App**: http://localhost:3001
+- **Rails Game Server**: http://localhost:3000
+- **Mobile App**: Expo development server
 
 ### Testing
 
@@ -99,6 +119,30 @@ This project maintains high test coverage across all packages:
 | `web`        | 1 test   | Basic    | Smoke test                             |
 
 **Total: 67 tests** - [View Testing Guide](docs/TESTING.md)
+
+## 🎮 Game Modes
+
+### Local Play
+
+- **Two-player alternating mode** on same device
+- **No internet connection required**
+- **Perfect for testing UI and animations**
+- **Instant gameplay** with smooth animations
+
+### Online Multiplayer _(In Development)_
+
+- **Real-time gameplay** against remote opponents
+- **Game lobby** with active game listing
+- **WebSocket connections** with polling fallback
+- **User accounts** and game statistics
+- **Matchmaking** system for finding opponents
+
+### Single Player vs AI _(Planned)_
+
+- **ML-powered computer opponent**
+- **Multiple difficulty levels**
+- **Smart move suggestions**
+- **Adaptive gameplay** that learns from your style
 
 ## 📦 Packages
 

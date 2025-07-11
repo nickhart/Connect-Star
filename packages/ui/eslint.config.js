@@ -33,6 +33,11 @@ module.exports = [
         HTMLButtonElement: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        localStorage: 'readonly',
+        WebSocket: 'readonly',
+        fetch: 'readonly',
       },
     },
     plugins: {
@@ -42,6 +47,10 @@ module.exports = [
     rules: {
       ...tseslint.configs.recommended.rules,
       'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
     },
   },
   {

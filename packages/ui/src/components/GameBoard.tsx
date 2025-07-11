@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type { Board } from '@connect-star/types';
+import type { Board, GameMode } from '@connect-star/types';
 import { ROWS, COLS } from '@connect-star/game-logic';
 import './GameBoard.css';
 
@@ -8,6 +8,8 @@ interface GameBoardProps {
   onColumnClick?: (col: number) => void;
   disabled?: boolean;
   className?: string;
+  mode?: GameMode; // Optional for backward compatibility
+  isMyTurn?: boolean; // For multiplayer mode
 }
 
 interface DroppingPiece {
@@ -22,6 +24,8 @@ export function GameBoard({
   onColumnClick,
   disabled = false,
   className = '',
+  mode = 'local',
+  isMyTurn = true,
 }: GameBoardProps) {
   const [droppingPieces, setDroppingPieces] = useState<DroppingPiece[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -68,7 +72,10 @@ export function GameBoard({
   }, [board]);
 
   const handleColumnClick = (col: number) => {
-    if (!disabled && !isAnimating && onColumnClick) {
+    // In multiplayer mode, only allow moves if it's the player's turn
+    const canMove = mode === 'local' || (mode === 'multiplayer' && isMyTurn);
+
+    if (!disabled && !isAnimating && onColumnClick && canMove) {
       onColumnClick(col);
     }
   };
@@ -81,7 +88,9 @@ export function GameBoard({
             key={col}
             className="column-button"
             onClick={() => handleColumnClick(col)}
-            disabled={disabled || isAnimating}
+            disabled={
+              disabled || isAnimating || (mode === 'multiplayer' && !isMyTurn)
+            }
             aria-label={`Drop piece in column ${col + 1}`}
           >
             {Array.from({ length: ROWS }).map((_, row) => {

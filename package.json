@@ -37,6 +37,7 @@
     "clean": "turbo clean",
     "quality": "pnpm lint && pnpm type-check && pnpm test",
     "quality:fix": "pnpm format && pnpm lint && pnpm type-check",
+    "update-client": "./scripts/update-client.sh",
     "ci:watch": "./scripts/watch-ci.sh",
     "ci:status": "gh run list --limit 5",
     "ci:latest": "gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')",
@@ -54,11 +55,11 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-prettier": "^5.5.1",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^30.0.0",
-    "prettier": "^3.5.3",
-    "ts-jest": "^29.3.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
     "turbo": "^2.5.4"
   },
   "workspaces": [

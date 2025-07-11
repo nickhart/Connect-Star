@@ -29,11 +29,14 @@ const AUTH_STORAGE_KEY = 'connect-star-auth';
 
 export function AuthProvider({ children }: AuthProviderProps) {
   // Helper function to create client with token
-  const createClient = (token?: string) =>
-    new GameServerClient({
+  const createClient = (token?: string) => {
+    const client = new GameServerClient({
       apiUrl: 'http://localhost:3000',
       token,
     });
+    // console.log('🔑 Created client with token:', token);
+    return client;
+  };
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     player: null,
@@ -122,14 +125,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const client = createClient();
       const accessToken = await client.login(request);
+      // console.log('🔑 Login successful, got token:', accessToken);
 
       // The new client doesn't return user data directly, so we need to get it separately
       // For now, we'll create a minimal auth state and get user data later
       const tokens = { access_token: accessToken, refresh_token: '' }; // TODO: Handle refresh token
+      // console.log('🔑 Tokens object:', tokens);
 
       // Try to get current player
       try {
         const authenticatedClient = createClient(accessToken);
+        // console.log('🔑 Authenticating with client token:', accessToken);
+        // console.log('🔑 Client instance:', authenticatedClient);
+        // console.log('🔑 Client constructor name:', authenticatedClient.constructor.name);
         const player = await authenticatedClient.getCurrentPlayer();
         // Create a minimal user object - we may need to adjust this based on actual API response
         const user = {

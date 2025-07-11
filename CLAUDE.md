@@ -22,6 +22,9 @@ pnpm build
 # Build specific applications
 pnpm web:build
 pnpm mobile:build
+
+# Update Simple Game Server client dependency
+pnpm update-client          # Rebuilds and updates ../simple-game-server client
 ```
 
 ### Testing

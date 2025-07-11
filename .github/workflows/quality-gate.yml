@@ -2,13 +2,14 @@ name: Quality Gate
 
 on:
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, develop, multiplayer ]
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, multiplayer ]
 
 jobs:
   quality-gate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     
     steps:
     - name: Checkout code
@@ -54,6 +55,10 @@ jobs:
       
     - name: Test build
       run: pnpm build
+      
+    - name: Security audit
+      run: pnpm audit --audit-level moderate
+      continue-on-error: true
       
     - name: Upload coverage to Codecov
       if: success()

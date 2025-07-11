@@ -14,7 +14,6 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/**/index.ts',
   ],
-  coverageReporters: ['text', 'lcov', 'html'],
   coverageDirectory: 'coverage',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };

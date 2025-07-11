@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc && cp -r src/components/*.css dist/components/ 2>/dev/null || true",
+    "build": "tsc && mkdir -p dist/components && cp src/components/*.css dist/components/ 2>/dev/null || true",
     "dev": "tsc --watch",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
@@ -19,6 +19,7 @@
   "dependencies": {
     "@connect-star/game-logic": "workspace:*",
     "@connect-star/types": "workspace:*",
+    "@simple-game-server/client": "file:../../../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz",
     "react": "18.2.0"
   },
   "devDependencies": {

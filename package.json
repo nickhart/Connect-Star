@@ -64,16 +64,16 @@
     "turbo": "^2.5.4"
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,jsx}": [
-      "prettier --write"
+    "packages/ui/**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "bash -c 'cd packages/ui && pnpm lint --fix'"
     ],
     "packages/**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
-      "bash -c 'cd packages/$(echo \"$0\" | cut -d/ -f2) && pnpm lint --fix'"
+      "prettier --write"
     ],
     "apps/**/*.{ts,tsx,js,jsx}": [
       "prettier --write",
-      "bash -c 'cd apps/$(echo \"$0\" | cut -d/ -f2) && pnpm lint --fix'"
+      "bash -c 'app_name=$(echo \"$0\" | grep -o \"apps/[^/]*\" | cut -d/ -f2); cd apps/$app_name && pnpm lint --fix'"
     ],
     "**/*.{json,md,css}": [
       "prettier --write"
@@ -90,6 +90,6 @@
     }
   },
   "dependencies": {
-    "@simple-game-server/client": "link:/Users/nickhart/Developer/simple-game-server/clients/typescript"
+    "@simple-game-server/client": "file:../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz"
   }
 }

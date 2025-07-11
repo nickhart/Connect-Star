@@ -26,7 +26,9 @@ describe('MainMenu', () => {
     );
 
     expect(screen.getByText('Play Locally')).toBeInTheDocument();
-    expect(screen.getByText('Play Online')).toBeInTheDocument();
+    expect(
+      screen.getByText('Play Online (Login Required)')
+    ).toBeInTheDocument();
     expect(screen.getByText('Play vs Computer')).toBeInTheDocument();
     expect(screen.getByText('About')).toBeInTheDocument();
   });
@@ -40,13 +42,19 @@ describe('MainMenu', () => {
     expect(mockOnGameModeSelect).toHaveBeenCalledWith('local');
   });
 
-  it('calls onGameModeSelect with "multiplayer" when Play Online is clicked', () => {
+  it('calls onLogin when Play Online is clicked without user', () => {
+    const mockOnLogin = jest.fn();
     render(
-      <MainMenu onGameModeSelect={mockOnGameModeSelect} onAbout={mockOnAbout} />
+      <MainMenu
+        onGameModeSelect={mockOnGameModeSelect}
+        onAbout={mockOnAbout}
+        onLogin={mockOnLogin}
+      />
     );
 
-    fireEvent.click(screen.getByText('Play Online'));
-    expect(mockOnGameModeSelect).toHaveBeenCalledWith('multiplayer');
+    fireEvent.click(screen.getByText('Play Online (Login Required)'));
+    expect(mockOnLogin).toHaveBeenCalled();
+    expect(mockOnGameModeSelect).not.toHaveBeenCalled();
   });
 
   it('calls onAbout when About button is clicked', () => {
@@ -116,8 +124,74 @@ describe('MainMenu', () => {
 
     // Check that buttons are properly enabled/disabled
     expect(screen.getByText('Play Locally')).toBeEnabled();
-    expect(screen.getByText('Play Online')).toBeEnabled();
+    expect(screen.getByText('Play Online (Login Required)')).toBeEnabled();
     expect(screen.getByText('Play vs Computer')).toBeDisabled();
     expect(screen.getByText('About')).toBeEnabled();
+  });
+
+  it('shows user info when logged in', () => {
+    const mockUser = {
+      id: 1,
+      email: 'test@example.com',
+      role: 'player' as const,
+    };
+    const mockPlayer = { id: 'player-123', name: 'TestPlayer', userId: 1 };
+    const mockOnLogout = jest.fn();
+
+    render(
+      <MainMenu
+        onGameModeSelect={mockOnGameModeSelect}
+        onAbout={mockOnAbout}
+        user={mockUser}
+        player={mockPlayer}
+        onLogout={mockOnLogout}
+      />
+    );
+
+    expect(screen.getByText('Welcome, TestPlayer! 👋')).toBeInTheDocument();
+    expect(screen.getByText('Logout')).toBeInTheDocument();
+    expect(screen.getByText('Play Online')).toBeInTheDocument(); // Should show "Play Online" not "Login Required"
+  });
+
+  it('calls onGameModeSelect with "multiplayer" when Play Online is clicked with authenticated user', () => {
+    const mockUser = {
+      id: 1,
+      email: 'test@example.com',
+      role: 'player' as const,
+    };
+    const mockPlayer = { id: 'player-123', name: 'TestPlayer', userId: 1 };
+
+    render(
+      <MainMenu
+        onGameModeSelect={mockOnGameModeSelect}
+        onAbout={mockOnAbout}
+        user={mockUser}
+        player={mockPlayer}
+      />
+    );
+
+    fireEvent.click(screen.getByText('Play Online'));
+    expect(mockOnGameModeSelect).toHaveBeenCalledWith('multiplayer');
+  });
+
+  it('calls onLogout when Logout button is clicked', () => {
+    const mockUser = {
+      id: 1,
+      email: 'test@example.com',
+      role: 'player' as const,
+    };
+    const mockOnLogout = jest.fn();
+
+    render(
+      <MainMenu
+        onGameModeSelect={mockOnGameModeSelect}
+        onAbout={mockOnAbout}
+        user={mockUser}
+        onLogout={mockOnLogout}
+      />
+    );
+
+    fireEvent.click(screen.getByText('Logout'));
+    expect(mockOnLogout).toHaveBeenCalled();
   });
 });

@@ -16,10 +16,10 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@connect-star/api-client": "workspace:*",
     "@connect-star/game-logic": "workspace:*",
     "@connect-star/types": "workspace:*",
     "@connect-star/ui": "workspace:*",
+    "@simple-game-server/client": "file:../../../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz",
     "next": "14.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"

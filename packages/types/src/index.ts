@@ -75,3 +75,68 @@ export interface GameEvent {
   data: any;
   timestamp: Date;
 }
+
+// Authentication Types
+export type UserRole = 'admin' | 'player';
+
+export interface User {
+  id: number;
+  email: string;
+  role: UserRole;
+}
+
+export interface GamePlayer {
+  id: string; // UUID
+  name: string;
+  userId?: number; // Optional - can be null for anonymous players
+}
+
+export interface AuthTokens {
+  access_token: string;
+  refresh_token: string;
+}
+
+export interface AuthResponse {
+  user: User;
+  access_token: string;
+  refresh_token: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface RegisterRequest {
+  user: {
+    email: string;
+    password: string;
+    password_confirmation: string;
+  };
+}
+
+export interface CreatePlayerRequest {
+  name: string;
+}
+
+export interface RefreshTokenRequest {
+  token: {
+    refresh_token: string;
+  };
+}
+
+export interface AuthState {
+  user: User | null;
+  player: GamePlayer | null;
+  tokens: AuthTokens | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}
+
+export interface AuthContextType extends AuthState {
+  login: (request: LoginRequest) => Promise<void>;
+  register: (request: RegisterRequest) => Promise<void>;
+  logout: () => void;
+  refreshToken: () => Promise<void>;
+  createPlayer: (request: CreatePlayerRequest) => Promise<void>;
+}

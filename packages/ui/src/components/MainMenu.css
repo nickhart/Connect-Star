@@ -28,7 +28,8 @@
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -41,6 +42,29 @@
   margin: 0;
   opacity: 0.9;
   font-weight: 300;
+}
+
+.main-menu__user-info {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-menu__user-welcome {
+  font-size: 1rem;
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.main-menu__logout-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-width: auto;
+  width: auto;
 }
 
 .main-menu__options {
@@ -107,19 +131,19 @@
   .main-menu {
     padding: 1rem;
   }
-  
+
   .main-menu__title {
     font-size: 2.5rem;
   }
-  
+
   .main-menu__subtitle {
     font-size: 1.2rem;
   }
-  
+
   .main-menu__options {
     max-width: 280px;
   }
-  
+
   .main-menu__button {
     padding: 0.875rem 1.5rem;
     font-size: 1rem;

@@ -127,14 +127,17 @@ Connect-Star/
 The following test accounts are available for development and testing:
 
 **Player1:**
+
 - Email: `player1@example.com`
 - Password: `password123`
 
 **Player2:**
-- Email: `player2@example.com`  
+
+- Email: `player2@example.com`
 - Password: `password123`
 
 **Admin:**
+
 - Email: `admin@example.com`
 - Password: `password123`
 

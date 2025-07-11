@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { GameServerClient } from '@simple-game-server/client';
-import type { Game, GameSession, CreateGameSessionRequest } from '@simple-game-server/client';
+import type { Game, GameSession } from '@simple-game-server/client';
 import { useAuth } from '../contexts/AuthContext';
 
 interface MultiplayerLobbyProps {
   onBackToMenu: () => void;
+  onJoinGame: (gameSession: GameSession, game: Game) => void;
 }
 
-export function MultiplayerLobby({ onBackToMenu }: MultiplayerLobbyProps) {
+export function MultiplayerLobby({
+  onBackToMenu,
+  onJoinGame,
+}: MultiplayerLobbyProps) {
   const { tokens } = useAuth();
   const [games, setGames] = useState<Game[]>([]);
   const [gameSessions, setGameSessions] = useState<GameSession[]>([]);
@@ -36,7 +40,7 @@ export function MultiplayerLobby({ onBackToMenu }: MultiplayerLobbyProps) {
       console.log('🎮 Games type:', typeof gamesList);
       console.log('🎮 Is array:', Array.isArray(gamesList));
       setGames(gamesList);
-      
+
       // Auto-select Connect Four if available
       const connectFour = gamesList.find(g => g.name === 'Connect Four');
       if (connectFour) {
@@ -55,35 +59,71 @@ export function MultiplayerLobby({ onBackToMenu }: MultiplayerLobbyProps) {
       const sessions = await client.getGameSessions(gameId);
       setGameSessions(sessions);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load game sessions');
+      setError(
+        err instanceof Error ? err.message : 'Failed to load game sessions'
+      );
     }
   };
 
   // Create new game session
   const createGameSession = async () => {
     if (!selectedGame) return;
-    
+
     try {
       const client = createClient();
       const newSession = await client.createGameSession(selectedGame.id, {});
-      setGameSessions([newSession, ...gameSessions]);
+      
       setShowCreateModal(false);
+      
+      // Creator automatically joins the game session
+      try {
+        const joinedSession = await client.joinGameSession(
+          selectedGame.id,
+          newSession.id,
+          {}
+        );
+        console.log('Creator successfully joined:', joinedSession);
+        onJoinGame(joinedSession, selectedGame);
+      } catch (joinError) {
+        console.log('Join failed, fetching session directly:', joinError);
+        // If join fails, get the session and navigate anyway (creator might already be joined)
+        const currentSession = await client.getGameSession(selectedGame.id, newSession.id);
+        console.log('Fetched session after join error:', currentSession);
+        onJoinGame(currentSession, selectedGame);
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create game session');
+      setError(
+        err instanceof Error ? err.message : 'Failed to create game session'
+      );
     }
   };
 
   // Join existing game session
   const joinGameSession = async (sessionId: number) => {
     if (!selectedGame) return;
-    
+
     try {
       const client = createClient();
-      const updatedSession = await client.joinGameSession(selectedGame.id, sessionId, {});
-      console.log('Joined game session:', updatedSession);
-      // TODO: Navigate to game screen
+      
+      // Try to join the game session
+      try {
+        const updatedSession = await client.joinGameSession(
+          selectedGame.id,
+          sessionId,
+          {}
+        );
+        console.log('Joined game session:', updatedSession);
+        onJoinGame(updatedSession, selectedGame);
+      } catch (joinError) {
+        // If join fails, maybe user is already in the game - just get the session and navigate
+        console.log('Join failed, checking if already in game:', joinError);
+        const currentSession = await client.getGameSession(selectedGame.id, sessionId);
+        onJoinGame(currentSession, selectedGame);
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to join game session');
+      setError(
+        err instanceof Error ? err.message : 'Failed to access game session'
+      );
     }
   };
 
@@ -147,7 +187,7 @@ export function MultiplayerLobby({ onBackToMenu }: MultiplayerLobbyProps) {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Select Game</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {games.map((game) => (
+            {games.map(game => (
               <button
                 key={game.id}
                 onClick={() => {
@@ -192,21 +232,22 @@ export function MultiplayerLobby({ onBackToMenu }: MultiplayerLobbyProps) {
               </div>
             ) : (
               <div className="space-y-4">
-                {gameSessions.map((session) => (
+                {gameSessions.map(session => (
                   <div
                     key={session.id}
                     className="border rounded-lg p-4 hover:bg-gray-50"
                   >
                     <div className="flex justify-between items-center">
                       <div>
-                        <h3 className="font-semibold">
-                          Game #{session.id}
-                        </h3>
+                        <h3 className="font-semibold">Game #{session.id}</h3>
                         <p className="text-sm text-gray-600">
-                          Status: {session.status} • Players: {session.players?.length || 0}/{selectedGame.max_players}
+                          Status: {session.status} • Players:{' '}
+                          {session.players?.length || 0}/
+                          {selectedGame.max_players}
                         </p>
                         <p className="text-xs text-gray-500">
-                          Created: {new Date(session.created_at).toLocaleString()}
+                          Created:{' '}
+                          {new Date(session.created_at).toLocaleString()}
                         </p>
                       </div>
                       <div className="space-x-2">
@@ -243,14 +284,31 @@ export function MultiplayerLobby({ onBackToMenu }: MultiplayerLobbyProps) {
               <p className="text-gray-600 mb-6">
                 Create a new {selectedGame?.name} game session.
               </p>
-              
+
               {/* Future: Game configuration options will go here */}
               <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                <h4 className="font-medium text-gray-700 mb-2">Game Settings</h4>
+                <h4 className="font-medium text-gray-700 mb-2">
+                  Game Settings
+                </h4>
                 <div className="space-y-2 text-sm text-gray-600">
-                  <p>Board: 6x7 (Classic) <span className="text-gray-400">• Coming soon: Custom sizes</span></p>
-                  <p>Win condition: 4 in a row <span className="text-gray-400">• Coming soon: Configurable</span></p>
-                  <p>Mode: Classic Connect Four <span className="text-gray-400">• Coming soon: Variants</span></p>
+                  <p>
+                    Board: 6x7 (Classic){' '}
+                    <span className="text-gray-400">
+                      • Coming soon: Custom sizes
+                    </span>
+                  </p>
+                  <p>
+                    Win condition: 4 in a row{' '}
+                    <span className="text-gray-400">
+                      • Coming soon: Configurable
+                    </span>
+                  </p>
+                  <p>
+                    Mode: Classic Connect Four{' '}
+                    <span className="text-gray-400">
+                      • Coming soon: Variants
+                    </span>
+                  </p>
                 </div>
               </div>
 

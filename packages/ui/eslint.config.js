@@ -33,6 +33,8 @@ module.exports = [
         HTMLButtonElement: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
         localStorage: 'readonly',
         WebSocket: 'readonly',
         fetch: 'readonly',

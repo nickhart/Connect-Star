@@ -9,8 +9,10 @@ import {
   MultiplayerLobby,
 } from '@connect-star/ui';
 import { LocalGameScreen } from '../components/LocalGameScreen';
+import { MultiplayerGameScreen } from '../components/MultiplayerGameScreen';
 import { AboutScreen } from '../components/AboutScreen';
 import type { GameMode } from '@connect-star/types';
+import type { Game, GameSession } from '@simple-game-server/client';
 import '../styles/MainMenu.css';
 
 type AppScreen =
@@ -19,10 +21,14 @@ type AppScreen =
   | 'about'
   | 'auth'
   | 'player-setup'
-  | 'multiplayer';
+  | 'multiplayer'
+  | 'multiplayer-game';
 
 export default function Home() {
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('menu');
+  const [currentGameSession, setCurrentGameSession] =
+    useState<GameSession | null>(null);
+  const [currentGame, setCurrentGame] = useState<Game | null>(null);
   const { user, player, logout, isLoading } = useAuth();
 
   const handleGameModeSelect = (mode: GameMode) => {
@@ -48,6 +54,18 @@ export default function Home() {
 
   const handleBackToMenu = () => {
     setCurrentScreen('menu');
+  };
+
+  const handleJoinGame = (gameSession: GameSession, game: Game) => {
+    setCurrentGameSession(gameSession);
+    setCurrentGame(game);
+    setCurrentScreen('multiplayer-game');
+  };
+
+  const handleBackToLobby = () => {
+    setCurrentScreen('multiplayer');
+    setCurrentGameSession(null);
+    setCurrentGame(null);
   };
 
   const handleLogin = () => {
@@ -117,8 +135,21 @@ export default function Home() {
       )}
 
       {currentScreen === 'multiplayer' && (
-        <MultiplayerLobby onBackToMenu={handleBackToMenu} />
+        <MultiplayerLobby
+          onBackToMenu={handleBackToMenu}
+          onJoinGame={handleJoinGame}
+        />
       )}
+
+      {currentScreen === 'multiplayer-game' &&
+        currentGameSession &&
+        currentGame && (
+          <MultiplayerGameScreen
+            gameSession={currentGameSession}
+            game={currentGame}
+            onBackToLobby={handleBackToLobby}
+          />
+        )}
     </main>
   );
 }

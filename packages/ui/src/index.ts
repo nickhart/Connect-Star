@@ -6,4 +6,5 @@ export { LoginForm } from './components/LoginForm';
 export { RegisterForm } from './components/RegisterForm';
 export { AuthScreen } from './components/AuthScreen';
 export { PlayerSetupScreen } from './components/PlayerSetupScreen';
+export { MultiplayerLobby } from './components/MultiplayerLobby';
 export { AuthProvider, useAuth } from './contexts/AuthContext';

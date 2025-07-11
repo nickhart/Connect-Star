@@ -38,6 +38,7 @@
     "quality": "pnpm lint && pnpm type-check && pnpm test",
     "quality:fix": "pnpm format && pnpm lint && pnpm type-check",
     "update-client": "./scripts/update-client.sh",
+    "dev-token": "./scripts/get-dev-token.sh",
     "ci:watch": "./scripts/watch-ci.sh",
     "ci:status": "gh run list --limit 5",
     "ci:latest": "gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')",

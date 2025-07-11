@@ -25,6 +25,9 @@ pnpm mobile:build
 
 # Update Simple Game Server client dependency
 pnpm update-client          # Rebuilds and updates ../simple-game-server client
+
+# Get development authentication token
+pnpm dev-token              # Gets JWT token for API testing
 ```
 
 ### Testing
@@ -118,6 +121,24 @@ Connect-Star/
 - **Rails Game Server**: http://localhost:3000 (simple-game-server API)
 - **Database**: User accounts, game rooms, and match history
 - **WebSocket**: Real-time game updates and player events
+
+### Development Test Accounts
+
+The following test accounts are available for development and testing:
+
+**Player1:**
+- Email: `player1@example.com`
+- Password: `password123`
+
+**Player2:**
+- Email: `player2@example.com`  
+- Password: `password123`
+
+**Admin:**
+- Email: `admin@example.com`
+- Password: `password123`
+
+Use `pnpm dev-token` to generate JWT tokens for API testing with these accounts.
 
 ### Key Architectural Patterns
 

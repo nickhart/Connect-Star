@@ -6,6 +6,7 @@ import {
   useAuth,
   AuthScreen,
   PlayerSetupScreen,
+  MultiplayerLobby,
 } from '@connect-star/ui';
 import { LocalGameScreen } from '../components/LocalGameScreen';
 import { AboutScreen } from '../components/AboutScreen';
@@ -116,22 +117,7 @@ export default function Home() {
       )}
 
       {currentScreen === 'multiplayer' && (
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">
-              Multiplayer Coming Soon!
-            </h2>
-            <p className="mb-4">
-              Phase 3 will implement the multiplayer lobby.
-            </p>
-            <button
-              onClick={handleBackToMenu}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              Back to Menu
-            </button>
-          </div>
-        </div>
+        <MultiplayerLobby onBackToMenu={handleBackToMenu} />
       )}
     </main>
   );

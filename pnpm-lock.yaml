@@ -1652,7 +1652,7 @@ packages:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
 
   '@simple-game-server/client@file:../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz':
-    resolution: {integrity: sha512-oUyEKHAUYDBWaPS2YJxfzCJhMCR7x/cjoDf7HoO47/NSUueOJOL8fL2hdsl3LEjoqjmrWPL0Fbc9rYlId3Fz1A==, tarball: file:../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz}
+    resolution: {integrity: sha512-hq8L1t9Z91kRR/VkgWc1xWW25Oe73ME4tg/7dhaXiSG0fhKZ9gL+TbTmcxe2vWOm4/QyFoeUnL5LUv45njrkag==, tarball: file:../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz}
     version: 0.1.0
     engines: {node: '>=16.0.0'}
     peerDependencies:

@@ -2,9 +2,9 @@ name: Quality Gate
 
 on:
   pull_request:
-    branches: [ main, develop, multiplayer ]
+    branches: [ main, develop ]
   push:
-    branches: [ main, develop, multiplayer ]
+    branches: [ main, develop ]
 
 jobs:
   quality-gate:

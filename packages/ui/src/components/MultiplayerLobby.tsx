@@ -72,9 +72,9 @@ export function MultiplayerLobby({
     try {
       const client = createClient();
       const newSession = await client.createGameSession(selectedGame.id, {});
-      
+
       setShowCreateModal(false);
-      
+
       // Creator automatically joins the game session
       try {
         const joinedSession = await client.joinGameSession(
@@ -87,7 +87,10 @@ export function MultiplayerLobby({
       } catch (joinError) {
         console.log('Join failed, fetching session directly:', joinError);
         // If join fails, get the session and navigate anyway (creator might already be joined)
-        const currentSession = await client.getGameSession(selectedGame.id, newSession.id);
+        const currentSession = await client.getGameSession(
+          selectedGame.id,
+          newSession.id
+        );
         console.log('Fetched session after join error:', currentSession);
         onJoinGame(currentSession, selectedGame);
       }
@@ -104,7 +107,7 @@ export function MultiplayerLobby({
 
     try {
       const client = createClient();
-      
+
       // Try to join the game session
       try {
         const updatedSession = await client.joinGameSession(
@@ -117,7 +120,10 @@ export function MultiplayerLobby({
       } catch (joinError) {
         // If join fails, maybe user is already in the game - just get the session and navigate
         console.log('Join failed, checking if already in game:', joinError);
-        const currentSession = await client.getGameSession(selectedGame.id, sessionId);
+        const currentSession = await client.getGameSession(
+          selectedGame.id,
+          sessionId
+        );
         onJoinGame(currentSession, selectedGame);
       }
     } catch (err) {

@@ -72,8 +72,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "@simple-game-server/client": "file:../simple-game-server/clients/typescript/simple-game-server-client-0.1.0.tgz"
   }
 }

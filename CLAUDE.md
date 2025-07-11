@@ -63,6 +63,19 @@ pnpm format                # Prettier formatting
 pnpm clean                 # Remove build artifacts
 ```
 
+### Pre-flight Checks (Manual)
+
+```bash
+# Comprehensive pre-flight check (recommended before commit/push)
+pnpm preflight              # Interactive check with formatting options
+
+# Quick test runner with coverage
+pnpm test:quick             # Run tests and show coverage
+
+# Auto-fix formatting and linting issues
+pnpm fix                    # Format code and fix linting issues
+```
+
 ### CI/CD Monitoring
 
 ```bash
@@ -139,14 +152,15 @@ Connect-Star/
 - **Web**: Next.js 14 (App Router) + Tailwind CSS
 - **Mobile**: React Native + Expo 53
 - **Testing**: Jest + React Testing Library
-- **Code Quality**: ESLint + Prettier + Husky hooks
+- **Code Quality**: ESLint + Prettier + GitHub Actions
 
 ### Development Workflow
 
 - **Package manager**: pnpm (required)
-- **Git hooks**: Pre-commit formatting, pre-push testing
-- **Quality gates**: 75%+ test coverage required
+- **Quality gates**: GitHub Actions for PR validation, 75%+ test coverage required
+- **Manual pre-flight**: Use `pnpm preflight` before committing for local validation
 - **Testing strategy**: Unit tests (game-logic), component tests (ui), integration tests (api-client)
+- **CI/CD**: Automated quality checks on PRs, coverage reporting, build validation
 
 ### Common Patterns
 
@@ -203,9 +217,18 @@ Connect-Star/
 
 ### Notes for Development
 
-- Always run tests before committing: `pnpm test`
-- Use `pnpm quality` to run all quality checks
+- Use `pnpm preflight` before committing to catch issues early
+- GitHub Actions will run quality checks on PRs automatically
 - The monorepo uses workspace dependencies - changes to packages automatically affect apps
 - All packages must maintain 75%+ test coverage
 - Follow conventional commits for consistent commit messages
 - Rails game server must be running on localhost:3000 for multiplayer features
+
+### Recommended Development Workflow
+
+1. **Start development**: `pnpm dev` (or specific app with `pnpm web`, `pnpm mobile`)
+2. **Before committing**: `pnpm preflight` - comprehensive check with interactive fixes
+3. **Quick fixes**: `pnpm fix` - auto-format and lint
+4. **Test focus**: `pnpm test:quick` - run tests with coverage
+5. **Create PR**: GitHub Actions will validate quality gates automatically
+6. **Merge**: Quality gates must pass before merging

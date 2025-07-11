@@ -35,11 +35,8 @@
     "test:coverage": "jest --config jest.config.workspace.js --coverage",
     "test:ci": "jest --config jest.config.workspace.js --coverage --ci --watchAll=false",
     "clean": "turbo clean",
-    "prepare": "husky",
     "quality": "pnpm lint && pnpm type-check && pnpm test",
     "quality:fix": "pnpm format && pnpm lint && pnpm type-check",
-    "pre-commit": "pnpx lint-staged",
-    "pre-push": "pnpm test:ci && pnpm build && pnpm type-check",
     "ci:watch": "./scripts/watch-ci.sh",
     "ci:status": "gh run list --limit 5",
     "ci:latest": "gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')",
@@ -48,36 +45,21 @@
     "web:build": "pnpm build --filter=@connect-star/web",
     "mobile:build": "pnpm build --filter=@connect-star/mobile",
     "web:test": "pnpm test --filter=@connect-star/web",
-    "mobile:test": "pnpm test --filter=@connect-star/mobile"
+    "mobile:test": "pnpm test --filter=@connect-star/mobile",
+    "preflight": "./scripts/preflight.sh",
+    "test:quick": "./scripts/test-quick.sh",
+    "fix": "./scripts/format-fix.sh"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
-    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^30.0.0",
-    "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
     "ts-jest": "^29.3.4",
     "turbo": "^2.5.4"
-  },
-  "lint-staged": {
-    "packages/ui/**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
-      "bash -c 'cd packages/ui && pnpm lint --fix'"
-    ],
-    "packages/**/*.{ts,tsx,js,jsx}": [
-      "prettier --write"
-    ],
-    "apps/**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
-      "bash -c 'app_name=$(echo \"$0\" | grep -o \"apps/[^/]*\" | cut -d/ -f2); cd apps/$app_name && pnpm lint --fix'"
-    ],
-    "**/*.{json,md,css}": [
-      "prettier --write"
-    ]
   },
   "workspaces": [
     "apps/*",
